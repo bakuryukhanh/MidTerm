@@ -12,7 +12,6 @@ const galleryRouter = require("./routers/gallery");
 const myaccountRouter = require("./routers/myaccount");
 const shopRouter = require("./routers/shop");
 const cartRouter = require("./routers/cart");
-const wishlistRouter = require("./routers/wishlist");
 
 const app = express();
 
