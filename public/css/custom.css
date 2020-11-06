@@ -1,2 +1,8 @@
-
 /** ADD YOUR AWESOME CODES HERE **/
+.login-signup a {
+    float: right;
+    margin: 0 20px;
+    font-weight: bold;
+    background-color: #b0b435;
+    border: none;
+}

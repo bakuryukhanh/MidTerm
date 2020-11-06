@@ -9,7 +9,7 @@ const aboutRouter = require("./routers/about");
 const checkoutRouter = require("./routers/checkout");
 const contactRouter = require("./routers/contact");
 const galleryRouter = require("./routers/gallery");
-const myaccountRouter = require("./routers/myaccount");
+const accountRouter = require("./routers/account");
 const shopRouter = require("./routers/shop");
 const cartRouter = require("./routers/cart");
 
@@ -34,5 +34,7 @@ app.use("/gallery", galleryRouter);
 app.use("/contact", contactRouter);
 app.use("/shop", shopRouter);
 app.use("/cart", cartRouter);
+app.use("/account", accountRouter);
+app.use("/checkout", checkoutRouter);
 
 module.exports = app;
