@@ -1,4 +1,5 @@
 const aboutModel = require("../models/aboutModel");
 exports.index = (req, res, next) => {
-    res.render("about", { page: "about" });
+    sess = req.session;
+    res.render("about", { page: "about", cart: sess.Cart, login: sess.Login });
 };
