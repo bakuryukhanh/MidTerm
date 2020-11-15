@@ -24,11 +24,11 @@
                             <div class="toolbar-sorter-right">
                                 <span>Sort by </span>
                                 <select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD">
-                                    <option data-display="Select">Nothing</option>
-                                    <option value="1">Popularity</option>
-                                    <option value="2">High Price → High Price</option>
-                                    <option value="3">Low Price → High Price</option>
-                                    <option value="4">Best Selling</option>
+                                    <option value="0" data-display="Select">Nothing</option>
+                                    <option value="1" {{sortType sortType "1"}}>Popularity</option>
+                                    <option value="2" {{sortType sortType "2"}}>High Price → High Price</option>
+                                    <option value="3" {{sortType sortType "3"}}>Low Price → High Price</option>
+
                                 </select>
                             </div>
                             <p>Showing all 4 results</p>
@@ -210,4 +210,5 @@
         </div>
     </div>
 </div>
+<script src="js/shop-page.js"></script>
 <!-- End Shop Page -->

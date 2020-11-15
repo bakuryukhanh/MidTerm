@@ -1,4 +1,5 @@
 const cartModel = require("../models/cartModel");
 exports.index = (req, res, next) => {
-    res.render("cart", { page: "cart", login: sess.Login });
+    var sess = req.session;
+    res.render("cart", { page: "shop", login: sess.Login, cart: sess.Cart });
 };

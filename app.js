@@ -24,15 +24,11 @@ Handlebars.registerHelper("pages", function (value, test) {
     return value == test ? "active" : "";
 });
 
-Handlebars.registerHelper("total", function (products) {
-    if (products == undefined) return 0;
-    var total = 0;
-    var pro = JSON.parse(JSON.stringify(products));
-    for (product of pro) {
-        total += product.price;
-    }
-    return parseFloat(total).toFixed(2);
+Handlebars.registerHelper("sortType", function (value, test) {
+    if (value == undefined) return "";
+    return value == test ? "selected " : "";
 });
+
 var cart = { item: 2 };
 app.use(logger("dev"));
 app.use(express.json());
