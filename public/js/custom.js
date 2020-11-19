@@ -227,3 +227,10 @@
         cursorcolor: "#9b9b9c",
     });
 })(jQuery);
+var logoutBtn = document.getElementsByClassName("logout-btn")[0];
+logoutBtn.addEventListener("click", logout);
+function logout() {
+    fetch("/login/signout", {
+        method: "POST",
+    }).then(() => window.location.reload());
+}

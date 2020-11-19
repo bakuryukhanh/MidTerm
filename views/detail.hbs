@@ -1,0 +1,24 @@
+<div class="container" style="margin-top: 100px;margin-bottom: 100px">
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            <div class="products-single fix">
+                <div class="box-img-hover">
+                    <div class="type-lb">
+                        <p class="sale">Sale</p>
+                    </div>
+                    <img src="{{product.imgSrc}}" class="img-fluid" alt="Image">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            <div class="why-text full-width">
+                <h4>{{product.name}}</h4>
+                <h5>${{product.price}}</h5>
+                <p>{{product.description}}</p>
+
+            </div>
+            <a class="btn hvr-hover add-cart" style="margin: 50px;padding:10px" href="#">Add to
+                Cart</a>
+        </div>
+    </div>
+</div>

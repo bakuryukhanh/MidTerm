@@ -12,14 +12,17 @@ const galleryRouter = require("./routers/gallery");
 const accountRouter = require("./routers/account");
 const shopRouter = require("./routers/shop");
 const cartRouter = require("./routers/cart");
-const loginRouter = require("./routers/login");
+const userRouter = require("./routers/user");
 
 const app = express();
-var sess;
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 
 Handlebars.registerHelper("pages", function (value, test) {
+    if (value == undefined) return "";
+    return value == test ? "active" : "";
+});
+Handlebars.registerHelper("filters", function (value, test) {
     if (value == undefined) return "";
     return value == test ? "active" : "";
 });
@@ -35,12 +38,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/static", express.static(path.resolve("./public")));
 app.use(
     session({
         resave: true,
         saveUninitialized: true,
         secret: "somesecret",
-        cookie: { maxAge: 60000 },
+        cookie: { maxAge: 600000 },
     })
 );
 
@@ -52,6 +56,6 @@ app.use("/shop", shopRouter);
 app.use("/cart", cartRouter);
 app.use("/account", accountRouter);
 app.use("/checkout", checkoutRouter);
-app.use("/login", loginRouter);
+app.use("/user", userRouter);
 
 module.exports = app;

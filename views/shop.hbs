@@ -26,12 +26,11 @@
                                 <select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD">
                                     <option value="0" data-display="Select">Nothing</option>
                                     <option value="1" {{sortType sortType "1"}}>Popularity</option>
-                                    <option value="2" {{sortType sortType "2"}}>High Price → High Price</option>
+                                    <option value="2" {{sortType sortType "2"}}>High Price → Low Price</option>
                                     <option value="3" {{sortType sortType "3"}}>Low Price → High Price</option>
 
                                 </select>
                             </div>
-                            <p>Showing all 4 results</p>
                         </div>
                         <div class="col-12 col-sm-4 text-center text-sm-right">
                             <ul class="nav nav-tabs ml-auto">
@@ -64,16 +63,20 @@
                                                         <li><a href="#" data-toggle="tooltip" data-placement="right"
                                                                 title="View"><i class="fas fa-eye"></i></a></li>
                                                         <li><a href="#" data-toggle="tooltip" data-placement="right"
-                                                                title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                                                                title="Compare"><i class="fas fa-sync-alt"></i></a>
+                                                        </li>
                                                         <li><a href="#" data-toggle="tooltip" data-placement="right"
                                                                 title="Add to Wishlist"><i class="far fa-heart"></i></a>
                                                         </li>
                                                     </ul>
-                                                    <a class="cart add-cart" style="user-select: none;">Add to Cart</a>
+                                                    <a class="cart add-cart" style="user-select: none;">Add to
+                                                        Cart</a>
                                                 </div>
                                             </div>
                                             <div class="why-text">
-                                                <h4 class="product-name shop-item-title">{{name}}</h4>
+                                                <a href=" /shop/{{_id}}">
+                                                    <h4 class="product-name shop-item-title">{{name}}</h4>
+                                                </a>
                                                 <h5 class="product-price shop-item-price"> ${{price}}</h5>
                                             </div>
                                         </div>
@@ -117,11 +120,13 @@
                                                     suscipit nisi. Morbi dignissim risus sit amet orci porta, eget
                                                     aliquam purus
                                                     sollicitudin. Cras eu metus felis. Sed arcu arcu, sagittis in
-                                                    blandit eu, imperdiet sit amet eros. Donec accumsan nisi purus, quis
+                                                    blandit eu, imperdiet sit amet eros. Donec accumsan nisi purus,
+                                                    quis
                                                     euismod ex volutpat in. Vestibulum eleifend eros ac lobortis
                                                     aliquet.
                                                     Suspendisse at ipsum vel lacus vehicula blandit et sollicitudin
-                                                    quam. Praesent vulputate semper libero pulvinar consequat. Etiam ut
+                                                    quam. Praesent vulputate semper libero pulvinar consequat. Etiam
+                                                    ut
                                                     placerat lectus.</p>
                                                 <a class="btn hvr-hover add-cart" href="#">Add to Cart</a>
                                             </div>
@@ -150,46 +155,50 @@
                             data-children=".sub-men">
                             <div class="list-group-collapse sub-men">
                                 <a class="list-group-item list-group-item-action" href="#sub-men1"
-                                    data-toggle="collapse" aria-expanded="true" aria-controls="sub-men1">Fruits & Drinks
-                                    <small class="text-muted">(100)</small>
+                                    data-toggle="collapse" aria-expanded="true" aria-controls="sub-men1">Categories
+
                                 </a>
-                                <div class="collapse show" id="sub-men1" data-parent="#list-group-men">
+                                <div class="collapse {{#if filter}}show{{/if}}" id="sub-men1"
+                                    data-parent="#list-group-men">
                                     <div class="list-group">
-                                        <a href="#" class="list-group-item list-group-item-action active">Fruits 1
-                                            <small class="text-muted">(50)</small></a>
-                                        <a href="#" class="list-group-item list-group-item-action">Fruits 2 <small
-                                                class="text-muted">(10)</small></a>
-                                        <a href="#" class="list-group-item list-group-item-action">Fruits 3 <small
-                                                class="text-muted">(10)</small></a>
-                                        <a href="#" class="list-group-item list-group-item-action">Fruits 4 <small
-                                                class="text-muted">(10)</small></a>
-                                        <a href="#" class="list-group-item list-group-item-action">Fruits 5 <small
-                                                class="text-muted">(20)</small></a>
+                                        <a href="/shop/filter/coffee"
+                                            class="list-group-item list-group-item-action {{filters filter "coffee"}}">Coffee
+                                        </a>
+                                        <a href="/shop/filter/tea"
+                                            class="list-group-item list-group-item-action {{filters filter "tea"}}">Tea</a>
+                                        <a href="/shop/filter/milk-tea"
+                                            class="list-group-item list-group-item-action {{filters filter "milk-tea"}}">Milk
+                                            Tea</a>
+                                        <a href="/shop" class="list-group-item list-group-item-action">
+                                            All</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="list-group-collapse sub-men">
-                                <a class="list-group-item list-group-item-action" href="#sub-men2"
-                                    data-toggle="collapse" aria-expanded="false" aria-controls="sub-men2">Vegetables
-                                    <small class="text-muted">(50)</small>
-                                </a>
+
                                 <div class="collapse" id="sub-men2" data-parent="#list-group-men">
                                     <div class="list-group">
-                                        <a href="#" class="list-group-item list-group-item-action">Vegetables 1 <small
-                                                class="text-muted">(10)</small></a>
-                                        <a href="#" class="list-group-item list-group-item-action">Vegetables 2 <small
-                                                class="text-muted">(20)</small></a>
-                                        <a href="#" class="list-group-item list-group-item-action">Vegetables 3 <small
-                                                class="text-muted">(20)</small></a>
+                                        <a href="/shop/filter/coffee"
+                                            class="list-group-item list-group-item-action">Coffee</a>
+                                        <a href="/shop/filter/tea"
+                                            class="list-group-item list-group-item-action">Tea</a>
+                                        <a href="/shop/filter/milk-tea"
+                                            class="list-group-item list-group-item-action">Milk
+                                            Tea</a>
+
                                     </div>
                                 </div>
                             </div>
-                            <a href="#" class="list-group-item list-group-item-action"> Grocery <small
-                                    class="text-muted">(150) </small></a>
-                            <a href="#" class="list-group-item list-group-item-action"> Grocery <small
-                                    class="text-muted">(11)</small></a>
-                            <a href="#" class="list-group-item list-group-item-action"> Grocery <small
-                                    class="text-muted">(22)</small></a>
+                            <div class="list-group">
+                                <a href="/shop/filter/new"
+                                    class="list-group-item list-group-item-action {{filters filter "new"}}">New</a>
+                                <a href="/shop/filter/hot"
+                                    class="list-group-item list-group-item-action {{filters filter "hot"}}">Hot</a>
+                                <a href="/shop/filter/sale"
+                                    class="list-group-item list-group-item-action {{filters filter "sale"}}">Sale
+                                </a>
+
+                            </div>
                         </div>
                     </div>
                     <div class="filter-price-left">
@@ -210,5 +219,5 @@
         </div>
     </div>
 </div>
-<script src="js/shop-page.js"></script>
+<script src="/static/js/shop-page.js"></script>
 <!-- End Shop Page -->

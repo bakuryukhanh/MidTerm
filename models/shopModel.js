@@ -1,87 +1,17 @@
-var Products = [
-    {
-        id: 1,
-        name: "HAZELNUT COFFFEE",
-        price: 29.05,
-        imgSrc: "images/gallery-img-01.jpg",
-        type: "coffee",
+const mongoose = require("../mongoose/mongoose");
+const productsSchema = new mongoose.Schema({
+    id: {
+        type: Number,
+        unique: true,
     },
-    {
-        id: 2,
-        name: "EXPRESSO",
-        price: 23.05,
-        imgSrc: "images/gallery-img-02.jpg",
-        type: "coffee",
-    },
-    {
-        id: 3,
-        name: "MOCHA COFFEE",
-        price: 2.05,
-        imgSrc: "images/gallery-img-03.jpg",
-        type: "coffee",
-    },
-    {
-        id: 4,
-        name: "LATTE COFFEE",
-        price: 29.05,
-        imgSrc: "images/gallery-img-04.jpg",
-        type: "coffee",
-    },
-    {
-        id: 5,
-        name: "AMERICANO",
-        price: 292.05,
-        imgSrc: "images/gallery-img-05.jpg",
-        type: "coffee",
-    },
-    {
-        id: 6,
-        name: "GOLDEN PEAR TEA",
-        price: 29.05,
-        imgSrc: "images/gallery-img-06.jpg",
-        type: "tea",
-    },
-    {
-        id: 7,
-        name: "TRÀ VẢI TRÁI CÂY",
-        price: 299.05,
-        imgSrc: "images/gallery-img-07.jpg",
-        type: "tea",
-    },
-    {
-        id: 8,
-        name: "TRÀ TÁO XANH",
-        price: 229.05,
-        imgSrc: "images/gallery-img-08.jpg",
-        type: "tea",
-    },
-    {
-        id: 9,
-        name: "LYCHEE TEA",
-        price: 2109.05,
-        imgSrc: "images/gallery-img-09.jpg",
-        type: "tea",
-    },
-    {
-        id: 10,
-        name: "CINAMON TEA",
-        price: 10.05,
-        imgSrc: "images/gallery-img-10.jpg",
-        type: "tea",
-    },
-    {
-        id: 11,
-        name: "MILK TEA",
-        price: 29.05,
-        imgSrc: "images/gallery-img-11.jpg",
-        type: "milk-tea",
-    },
-    {
-        id: 12,
-        name: "TRADITIONAL MILK FOAM",
-        price: 29.05,
-        imgSrc: "images/gallery-img-12.jpg",
-        type: "milk-tea",
-    },
-];
-exports.Products = Products;
+    name: String,
+    price: Number,
+    imgSrc: String,
+    type: String,
+    isHot: Boolean,
+    isSale: Boolean,
+    New: Boolean,
+});
+let productModel = mongoose.model("product", productsSchema);
+
+exports.productModel = productModel;

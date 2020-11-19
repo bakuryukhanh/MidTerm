@@ -4,6 +4,9 @@ const shopController = require("../controllers/shopController");
 
 router.get("/", shopController.index);
 router.post("/", shopController.cart);
-router.post("/sort", shopController.sort);
+router.get("/:id", shopController.detail);
+router.get("/sort/:sortType", shopController.sort);
+router.get("/filter/:type", shopController.filter);
+router.get("/filter/:type/:start/:end", shopController.filter);
 
 module.exports = router;
