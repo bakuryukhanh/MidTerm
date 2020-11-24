@@ -1,14 +1,15 @@
 const shopModel = require("../models/shopModel");
-var productsModel = shopModel.productModel;
+var { productModel } = shopModel;
 
-exports.index = (req, res, next) => {
+exports.index = async (req, res, next) => {
     sess = req.session;
-    productsModel.find({}, (err, products) => {
-        res.render("gallery", {
-            page: "gallery",
-            products: products,
-            cart: sess.Cart,
-            login: sess.Login,
-        });
+    const products = await productModel
+        .find({})
+        .catch((err) => console.error(err));
+    await res.render("gallery", {
+        page: "gallery",
+        products: products,
+        cart: sess.Cart,
+        login: sess.Login,
     });
 };

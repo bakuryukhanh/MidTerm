@@ -16,31 +16,42 @@ function submitForm() {
     // Initiate Variables With Form Content
     var name = $("#name").val();
     var email = $("#email").val();
-    var msg_subject = $("#msg_subject").val();
+    var subject = $("#subject").val();
     var message = $("#message").val();
-
+    var data = { name, email, subject, message };
     //Submit form
-    $.ajax({
-        type: "POST",
-        url: "php/form-process.php",
-        data:
-            "name=" +
-            name +
-            "&email=" +
-            email +
-            "&msg_subject=" +
-            msg_subject +
-            "&message=" +
-            message,
-        success: function (text) {
-            if (text == "success") {
-                formSuccess();
-            } else {
-                formError();
-                submitMSG(false, text);
-            }
+    fetch("", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+            "content-type": "application/json",
         },
-    });
+    })
+        .then((res) => res.json())
+        .then((res) => {
+            if (res.log == "success") {
+                var dialog = $("#dialog")[0];
+                dialog.innerHTML = `<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>Thanks for your feedback</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>`;
+            }
+        })
+        .then(() => $("#myModal").modal("show"));
 }
 
 function formSuccess() {

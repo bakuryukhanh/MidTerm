@@ -1,25 +1,20 @@
-const shopModel = require("../models/shopModel");
+const { productModel } = require("../models/shopModel");
 
-exports.index = (req, res, next) => {
-    const productModel = shopModel.productModel;
+exports.index = async (req, res, next) => {
     sess = req.session;
-    productModel
-        .find({})
-        .limit(4)
-        .exec((err, products) => {
-            if (sess.Login) {
-                res.render("home", {
-                    page: "home",
-                    cart: sess.Cart,
-                    login: sess.Login,
-                    products: products,
-                });
-            } else {
-                res.render("home", {
-                    page: "home",
-                    cart: sess.Cart,
-                    products: products,
-                });
-            }
+    const products = await productModel.find({}).limit(4);
+    if (sess.Login) {
+        res.render("home", {
+            page: "home",
+            cart: sess.Cart,
+            login: sess.Login,
+            products: products,
         });
+    } else {
+        res.render("home", {
+            page: "home",
+            cart: sess.Cart,
+            products: products,
+        });
+    }
 };

@@ -8,33 +8,25 @@ exports.index = (req, res, next) => {
     }
     res.render("user");
 };
-exports.login = (req, res, next) => {
-    const user = userModel;
-    user.findOne(req.body, (err, user) => {
-        if (err) {
-            res.json({ log: "failed" });
-        } else {
-            if (user != null) {
-                console.log(user);
-                req.session.Login = user;
-                sess = req.session;
-                res.json({ log: "success" });
-            } else {
-                res.json({ log: "failed" });
-            }
-        }
+exports.login = async (req, res, next) => {
+    const use = await userModel.findOne(req.body).catch((err) => {
+        console.err(err);
     });
-    console.log(user);
+    if (user != null) {
+        console.log(user);
+        req.session.Login = user;
+        sess = req.session;
+        res.json({ log: "success" });
+    } else {
+        res.json({ log: "failed" });
+    }
 };
-exports.signup = (req, res, next) => {
+exports.signup = async (req, res, next) => {
     console.log(req.body);
     const newUsr = new userModel(req.body);
-    newUsr
-        .save()
-        .then(() => res.json({ log: "success" }))
-        .catch((err) => {
-            res.json({ log: "failed" });
-        });
+
+    await newUsr.save().then(() => res.json({ log: "success" })).catch;
+    res.json({ log: "success" });
 };
 exports.signout = (req, res, next) => {
     sess = req.session;
