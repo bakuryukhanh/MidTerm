@@ -7,7 +7,8 @@ const billSchema = new mongoose.Schema({
     productList: Array,
     discountCode: String,
     shipping: Number,
-    Total: Number,
+    date: String,
+    total: Number,
     state: String,
 });
 

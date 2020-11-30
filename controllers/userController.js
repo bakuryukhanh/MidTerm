@@ -6,7 +6,7 @@ exports.index = (req, res, next) => {
     if (sess.Login) {
         res.redirect("/");
     }
-    res.render("user");
+    res.render("pages/user");
 };
 exports.login = async (req, res, next) => {
     const use = await userModel.findOne(req.body).catch((err) => {

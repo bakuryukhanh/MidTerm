@@ -1,9 +1,10 @@
-const { productModel } = require("../models/shopModel");
+const { productModel } = require("../models/productModel");
+const { ObjectId } = require("mongodb");
 var sortType = "0";
 exports.index = async (req, res, next) => {
     sess = req.session;
     var products = await productModel.find({});
-    res.render("shop", {
+    res.render("pages/shop", {
         page: "shop",
         products: products,
         cart: sess.Cart,
@@ -37,7 +38,7 @@ exports.sort = async (req, res, next) => {
     }
     const products = await productModel.find({}).sort(sort);
     sess = req.session;
-    res.render("shop", {
+    res.render("pages/shop", {
         page: "shop",
         products: products,
         cart: sess.Cart,
@@ -50,7 +51,7 @@ exports.filter = async (req, res, next) => {
     const type = req.params.type;
     const products = productModel.find({ type: type });
     sess = req.session;
-    res.render("shop", {
+    res.render("pages/shop", {
         page: "shop",
         products: products,
         cart: sess.Cart,
@@ -62,12 +63,11 @@ exports.filter = async (req, res, next) => {
 exports.detail = async (req, res, next) => {
     sess = req.session;
     const id = req.params.id;
-    const products = productModel.find({ _id: id });
-    sess = req.session;
-    res.render("detail", {
+    const products = await productModel.findOne({ _id: ObjectId(id) });
+    res.render("pages/detail", {
         page: "shop",
         cart: sess.Cart,
         login: sess.Login,
-        product: products[0],
+        product: products,
     });
 };

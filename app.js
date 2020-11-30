@@ -32,7 +32,24 @@ Handlebars.registerHelper("sortType", function (value, test) {
     return value == test ? "selected " : "";
 });
 
-var cart = { item: 2 };
+var blocks = {};
+Handlebars.registerPartials(__dirname + "/views/partials");
+Handlebars.registerHelper("extend", function (name, context) {
+    var block = blocks[name];
+    if (!block) {
+        block = blocks[name] = [];
+    }
+
+    block.push(context.fn(this));
+});
+Handlebars.registerHelper("block", function (name) {
+    var val = (blocks[name] || []).join("\n");
+
+    // clear the block
+    blocks[name] = [];
+    return val;
+});
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

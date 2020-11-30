@@ -39,10 +39,15 @@ function ready() {
 }
 function checkout(event) {
     event.preventDefault();
+    const today = new Date();
+    bill.date =
+        today.getDate() + "/" + today.getMonth() + "/" + today.getFullYear();
+    bill.total = parseFloat(document.getElementById("grand-total").innerHTML);
     bill.customerName = document.getElementById("name").value;
     bill.customerEmail = document.getElementById("email").value;
     bill.customerPhone = document.getElementById("phone").value;
     bill.customerAddress = document.getElementById("address").value;
+    bill.ship = 0;
     if (
         (bill.customerName == "") |
         (bill.customerEmail == "") |

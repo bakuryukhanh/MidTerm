@@ -1,4 +1,4 @@
-const shopModel = require("../models/shopModel");
+const shopModel = require("../models/productModel");
 var { productModel } = shopModel;
 
 exports.index = async (req, res, next) => {
@@ -6,7 +6,7 @@ exports.index = async (req, res, next) => {
     const products = await productModel
         .find({})
         .catch((err) => console.error(err));
-    await res.render("gallery", {
+    await res.render("pages/gallery", {
         page: "gallery",
         products: products,
         cart: sess.Cart,
