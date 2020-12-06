@@ -2,7 +2,7 @@ const loginForm = document.getElementById("formLogin");
 loginForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const loginData = new FormData(loginForm);
-    const email = loginData.getAll("email");
+    const email = loginData.get("email");
     const password = loginData.get("password");
     const data = { email: email, password: password };
     fetch("/user/login", {
@@ -17,14 +17,26 @@ loginForm.addEventListener("submit", (event) => {
             if (res.log == "success") {
                 window.location.reload();
             } else {
-                var notiPlace = document.getElementsByClassName(
-                    "login-placeholder"
-                )[0];
-                notiPlace.innerHTML = "";
-                var noti = document.createElement("p");
-                noti.classList.add("notify");
-                noti.innerHTML = `username or password wrong`;
-                notiPlace.append(noti);
+                var dialog = $("#dialog")[0];
+                dialog.innerHTML = `<div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <p>Username or password wrong</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>`;
+                $("#myModal").modal("show");
             }
         });
 });
@@ -32,46 +44,54 @@ const signupForm = document.getElementById("formRegister");
 signupForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const signupData = new FormData(signupForm);
-    const name = signupData.get("InputName");
-    const address = signupData.get("address");
-    const phone = signupData.get("phone");
-    const email = signupData.get("InputEmail1");
-    const password = signupData.get("InputPassword1");
-    const data = {
-        name: name,
-        address: address,
-        phoneNumber: phone,
-        email: email,
-        password: password,
-    };
-    console.log(data);
     fetch("/user/signup", {
         method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-            "content-type": "application/json",
-        },
+        body: signupData,
     })
         .then((res) => res.json())
         .then((res) => {
             if (res.log == "success") {
-                var notiPlace = document.getElementsByClassName(
-                    "noti-placeholder"
-                )[0];
-                notiPlace.innerHTML = "";
-                var noti = document.createElement("p");
-                noti.classList.add("notify");
-                noti.innerHTML = `Sign up success`;
-                notiPlace.append(noti);
+                var dialog = $("#dialog")[0];
+                dialog.innerHTML = `<div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <p>Sign up success</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>`;
+                $("#myModal").modal("show");
             } else {
-                var notiPlace = document.getElementsByClassName(
-                    "noti-placeholder"
-                )[0];
-                notiPlace.innerHTML = "";
-                var noti = document.createElement("p");
-                noti.classList.add("notify");
-                noti.innerHTML = `Sign up failed email has already exist`;
-                notiPlace.append(noti);
+                var dialog = $("#dialog")[0];
+                dialog.innerHTML = `<div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <p>Sign up failed</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>`;
+                $("#myModal").modal("show");
             }
         });
 });

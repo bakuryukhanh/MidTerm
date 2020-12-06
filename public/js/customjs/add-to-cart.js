@@ -18,6 +18,9 @@ function ready() {
     // }
 
     var addToCartButtons = document.getElementsByClassName("add-cart");
+    if (addToCartButtons.length == 0) {
+        return;
+    }
     for (var i = 0; i < addToCartButtons.length; i++) {
         var button = addToCartButtons[i];
         button.addEventListener("click", addToCartClicked);

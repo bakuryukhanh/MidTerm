@@ -1,0 +1,11 @@
+<nav aria-label="Page navigation example" style="float:right">
+    <ul class="pagination">
+
+        <li class="page-item {{#if hasPrevPage}}{{else}} disabled{{/if}}"><button class="page-link"
+                value={{prevPage}}>Previous</button>
+        </li>
+        {{{paginate totalPages currentPage }}}
+        <li class="page-item {{#if hasNextPage}}{{else}} disabled{{/if}}"><button class="page-link"
+                value={{nextPage}}>Next</button></li>
+    </ul>
+</nav>

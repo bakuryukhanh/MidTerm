@@ -1,4 +1,8 @@
 <!-- Start All Title Box -->
+{{>loginbar}}
+{{>navbar}}
+
+
 <div class="all-title-box">
     <div class="container">
         <div class="row">
@@ -88,6 +92,12 @@
                                     <span class="float-right font-weight-bold">$10.00</span> </div>
                                 <div class="ml-4 mb-2 small">(2-4 business days)</div>
                             </div>
+                            <div class="mb-0">
+                                <label for="discountCode" class="mr-2">Discount Code</label>
+                                <input type="text" class="mr-2" id="discountCode">
+                                <button class="btn btn-primary" id="check">Check</button>
+                            </div>
+                            <span id="check-message"></span>
                         </div>
                     </div>
                     <div class="col-md-12 col-lg-12">
@@ -121,11 +131,11 @@
                             <hr class="my-1">
                             <div class="d-flex">
                                 <h4>Total</h4>
-                                <div class="ml-auto font-weight-bold"> $ <span id="total">440 </span></div>
+                                <div class="ml-auto font-weight-bold"> $ <span id="total"> </span></div>
                             </div>
                             <div class="d-flex">
                                 <h4>Discount</h4>
-                                <div class="ml-auto font-weight-bold"> $ <span id="discount">40</span></div>
+                                <div class="ml-auto font-weight-bold"> $ <span id="discount">0</span></div>
                             </div>
                             <hr class="my-1">
                             <div class="d-flex">
@@ -135,7 +145,7 @@
                             <hr>
                             <div class="d-flex gr-total">
                                 <h5>Grand Total</h5>
-                                <div class="ml-auto h5"> $ <span id="grand-total">388 </span></div>
+                                <div class="ml-auto h5"> $ <span id="grand-total"> </span></div>
                             </div>
                             <hr>
                         </div>
@@ -150,4 +160,7 @@
     </div>
 </div>
 <!-- End Cart -->
+{{>instagramFeed}}
+{{>footer}}
 <script src="/js/customjs/checkout.js"></script>
+<script src="/js/customjs/discount-Code.js"></script>

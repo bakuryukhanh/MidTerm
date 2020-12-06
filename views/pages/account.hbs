@@ -1,104 +1,63 @@
-<!-- Start All Title Box -->
-<div class="all-title-box">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <h2>My Account</h2>
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Shop</a></li>
-                    <li class="breadcrumb-item active">My Account</li>
-                </ul>
+{{>loginbar}}
+{{>navbar}}
+<div class="container mt-5">
+    <div class="row full-vh">
+        <div class="col-md-6">
+            <div class="avarta-place">
+                <img src="{{login.imgSrc}}" class="rounded-circle avatar-lg shadow" style="width:300px;height:300px;"
+                    alt="avartar">
             </div>
-        </div>
-    </div>
-</div>
-<!-- End All Title Box -->
+            <hr>
+            <button class="btn btn-primary" id="change-ava">Change Avatar</button>
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
 
-<!-- Start My Account  -->
-<div class="my-account-box-main">
-    <div class="container">
-        <div class="my-account-page">
-            <div class="row">
-                <div class="col-lg-4 col-md-12">
-                    <div class="account-box">
-                        <div class="service-box">
-                            <div class="service-icon">
-                                <a href="#"> <i class="fa fa-gift"></i> </a>
-                            </div>
-                            <div class="service-desc">
-                                <h4>Your Orders</h4>
-                                <p>Track, return, or buy things again</p>
-                            </div>
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <input type='file' id="image-input" />
+                            <hr>
+                            <img id="image-preview" src="#" alt="your image"
+                                class="rounded-circle avatar-lg mx-auto hidden" style="width:150px;height:150px;" />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" id="update"
+                                data-dismiss="modal">Update</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                         </div>
                     </div>
+
                 </div>
-                <div class="col-lg-4 col-md-12">
-                    <div class="account-box">
-                        <div class="service-box">
-                            <div class="service-icon">
-                                <a href="#"><i class="fa fa-lock"></i> </a>
-                            </div>
-                            <div class="service-desc">
-                                <h4>Login &amp; security</h4>
-                                <p>Edit login, name, and mobile number</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12">
-                    <div class="account-box">
-                        <div class="service-box">
-                            <div class="service-icon">
-                                <a href="#"> <i class="fa fa-location-arrow"></i> </a>
-                            </div>
-                            <div class="service-desc">
-                                <h4>Your Addresses</h4>
-                                <p>Edit addresses for orders and gifts</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12">
-                    <div class="account-box">
-                        <div class="service-box">
-                            <div class="service-icon">
-                                <a href="#"> <i class="fa fa-credit-card"></i> </a>
-                            </div>
-                            <div class="service-desc">
-                                <h4>Payment options</h4>
-                                <p>Edit or add payment methods</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12">
-                    <div class="account-box">
-                        <div class="service-box">
-                            <div class="service-icon">
-                                <a href="#"> <i class="fab fa-paypal"></i> </a>
-                            </div>
-                            <div class="service-desc">
-                                <h4>PayPal</h4>
-                                <p>View benefits and payment settings</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12">
-                    <div class="account-box">
-                        <div class="service-box">
-                            <div class="service-icon">
-                                <a href="#"> <i class="fab fa-amazon"></i> </a>
-                            </div>
-                            <div class="service-desc">
-                                <h4>Amazon Pay balance</h4>
-                                <p>Add money to your balance</p>
+            </div>
+            <div class="modal fade" id="loadMe" role="dialog">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body text-center">
+                            <div class="loader"></div>
+                            <div clas="loader-txt">
+                                <p>Updating Avatar</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="col-md-6">
+            <div class="info-place">
+                <p class="h2">{{login.name}}</p>
+                <p class="h4">Email: {{login.email}}</p>
+                <p class="h4">Password: {{login.password}}</p>
+                <p class="h4">Address: {{login.address}}</p>
+                <p class="h4">Phone Number: {{login.phoneNumber}}</p>
+            </div>
+        </div>
     </div>
 </div>
-<!-- End My Account -->
+{{>instagramFeed}}
+{{>footer}}
+{{#extend "script"}}
+<script src="/js/customjs/change-ava.js"></script>
+{{/extend}}

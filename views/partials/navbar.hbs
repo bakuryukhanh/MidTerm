@@ -1,75 +1,78 @@
 <!-- Start Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
-    <div class="container">
-        <!-- Start Header Navigation -->
-        <div class="navbar-header">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu"
-                aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fa fa-bars"></i>
-            </button>
-            <a class="navbar-brand" href="/"><img src="images/logo.png" class="logo" alt=""></a>
-        </div>
-        <!-- End Header Navigation -->
+<header class="main-header">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
+        <div class="container">
+            <!-- Start Header Navigation -->
+            <div class="navbar-header">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu"
+                    aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="/"><img src="images/logo.png" class="logo" alt=""></a>
+            </div>
+            <!-- End Header Navigation -->
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="navbar-menu">
-            <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                <li class="nav-item {{pages page "home"}}"><a class="nav-link" href="/">Home</a></li>
-                <li class="nav-item {{pages page "about"}}"><a class="nav-link" href="/about">About Us</a></li>
-                <li class="dropdown {{pages page "shop"}}">
-                    <a href="/shop" class="nav-link dropdown-toggle arrow " data-toggle="dropdown">SHOP</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/shop">Sidebar Shop</a></li>
-                        <li><a href="/cart">Cart</a></li>
-                        <li><a href="/checkout">Checkout</a></li>
-                        <li><a href="/account">My Account</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item {{pages page "gallery"}}"><a class="nav-link" href="/gallery">Gallery</a>
-                </li>
-                <li class="nav-item {{pages page "contact"}}"><a class="nav-link" href="/contact">Contact
-                        Us</a></li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navbar-menu">
+                <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
+                    <li class="nav-item {{pages page "home"}}"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item {{pages page "about"}}"><a class="nav-link" href="/about">About Us</a></li>
+                    <li class="dropdown {{pages page "shop"}}">
+                        <a href="/shop" class="nav-link dropdown-toggle arrow " data-toggle="dropdown">SHOP</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/shop">Sidebar Shop</a></li>
+                            <li><a href="/cart">Cart</a></li>
+                            <li><a href="/checkout">Checkout</a></li>
+                            <li><a href="/account">My Account</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item {{pages page "gallery"}}"><a class="nav-link" href="/gallery">Gallery</a>
+                    </li>
+                    <li class="nav-item {{pages page "contact"}}"><a class="nav-link" href="/contact">Contact
+                            Us</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
 
-        <!-- Start Atribute Navigation -->
-        <div class="attr-nav">
-            <ul>
-                <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
-                <li class="side-menu">
-                    <a href="#">
-                        <i class="fa fa-shopping-bag"></i>
-                        <span class="badge">0</span>
-                        <p>My Cart</p>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <!-- End Atribute Navigation -->
-    </div>
-    <!-- Start Side Menu -->
-    <div class="side">
-        <a href="#" class="close-side"><i class="fa fa-times"></i></a>
-        <li class="cart-box">
-            <ul class="cart-list">
-                {{#each cart}}
-                <li class="cart-row">
-                    <a href="#" class="photo"><img src={{imgSrc}} class="cart-thumb" alt="" /></a>
-                    <h6><a href="#" class="cart-item-title">{{title}} </a></h6>
-                    <p><span class="quantity">{{quantity}}</span> x -<span class="price">${{price}}</span></p>
-                </li>
-                {{/each}}
+            <!-- Start Atribute Navigation -->
+            <div class="attr-nav">
+                <ul>
+                    <li class="side-menu">
+                        <a href="#">
+                            <i class="fa fa-shopping-bag"></i>
+                            <span class="badge">0</span>
+                            <p>My Cart</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
 
-                <li class="total">
-                    <a href="/cart" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
-                    <strong>Total</strong><span class="float-right cart-total-price">:
-                        $0</span>
-                </li>
-            </ul>
-        </li>
-    </div>
-    <!-- End Side Menu -->
-</nav>
+            <!-- End Atribute Navigation -->
+        </div>
+        <!-- Start Side Menu -->
+        <div class="side">
+            <a href="#" class="close-side"><i class="fa fa-times"></i></a>
+            <li class="cart-box">
+                <ul class="cart-list">
+                    {{#each cart}}
+                    <li class="cart-row">
+                        <a href="#" class="photo"><img src={{imgSrc}} class="cart-thumb" alt="" /></a>
+                        <h6><a href="#" class="cart-item-title">{{title}} </a></h6>
+                        <p><span class="quantity">{{quantity}}</span> x -<span class="price">${{price}}</span></p>
+                    </li>
+                    {{/each}}
+
+                    <li class="total">
+                        <a href="/cart" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+                        <strong>Total</strong><span class="float-right cart-total-price">:
+                            $0</span>
+                    </li>
+                </ul>
+            </li>
+        </div>
+        <!-- End Side Menu -->
+    </nav>
+</header>
+
 
 <!-- End Navigation -->

@@ -30,23 +30,10 @@
 
 </head>
 
-<body>
-    {{>loginbar}}
-    <header class="main-header">
-        {{>navbar}}
-    </header>
-    <div class="top-search">
-        <div class="container">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                <input type="text" class="form-control" placeholder="Search">
-                <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
-            </div>
-        </div>
-    </div>
+<body class="{{block "body-bg"}}">
+
     {{{body}}}
-    {{>instagramFeed}}
-    {{>footer}}
+
     <div class="footer-copyright">
         <p class="footer-company">All Rights Reserved. &copy; 2018 <a href="#">ThewayShop</a> Design By :
             <a href="https://html.design/">html design</a></p>
@@ -72,10 +59,13 @@
     <script type="text/javascript" src="/js/bootstrap/isotope.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap/owl.carousel.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap/baguetteBox.min.js"></script>
-    <script type="text/javascript" src="/js/form-validator.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap/form-validator.min.js"></script>
+    {{{block "script"}}}
+
     <script type="text/javascript" src="/js/customjs/contact-form-script.js"></script>
     <script type="text/javascript" src="/js/customjs/custom.js"></script>
     <script type="text/javascript" src="/js/customjs/add-to-cart.js"></script>
+
 
 </body>
 

@@ -13,6 +13,7 @@ const accountRouter = require("./routers/account");
 const shopRouter = require("./routers/shop");
 const cartRouter = require("./routers/cart");
 const userRouter = require("./routers/user");
+const discountRouter = require("./routers/discount");
 
 const app = express();
 app.set("views", path.join(__dirname, "views"));
@@ -49,6 +50,17 @@ Handlebars.registerHelper("block", function (name) {
     blocks[name] = [];
     return val;
 });
+Handlebars.registerHelper("paginate", function (totalPages, currentPage) {
+    var string = ``;
+    for (let i = 1; i <= totalPages; i++) {
+        if (i == currentPage) {
+            string += `<li class="page-item active"><button class="page-link" value=${i}>${i}</button></li>`;
+        } else {
+            string += `<li class="page-item"><button class="page-link" value=${i}>${i}</button></li>`;
+        }
+    }
+    return string;
+});
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -74,5 +86,6 @@ app.use("/cart", cartRouter);
 app.use("/account", accountRouter);
 app.use("/checkout", checkoutRouter);
 app.use("/user", userRouter);
+app.use("/discount", discountRouter);
 
 module.exports = app;

@@ -11,11 +11,11 @@ const form = document.getElementsByClassName("customer-infor")[0];
 var bill = { productList: [] };
 checkoutBtn.addEventListener("click", (event) => checkout(event));
 if (document.readyState == "loading") {
-    document.addEventListener("DOMContentLoaded", ready);
+    document.addEventListener("DOMContentLoaded", update);
 } else {
-    ready();
+    update();
 }
-function ready() {
+function update() {
     var totalprice = 0;
     for (let i = 0; i < productSubtotal.length; i++) {
         var subtotal =

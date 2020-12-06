@@ -1,33 +1,15 @@
+const ProductService = require("../models/services/productServices");
 const { productModel } = require("../models/productModel");
 const { ObjectId } = require("mongodb");
-var sortType = "0";
-exports.index = async (req, res, next) => {
-    sess = req.session;
-    var products = await productModel.find({});
-    res.render("pages/shop", {
-        page: "shop",
-        products: products,
-        cart: sess.Cart,
-        login: sess.Login,
-        sortType: sortType,
-    });
-};
-exports.cart = async (req, res, next) => {
-    req.session.Cart = req.body;
-    sess = req.session;
-    console.log(sess);
-    res.end("done");
-};
-exports.sort = async (req, res, next) => {
-    console.log(req.params);
-    sess = req.session;
-    const sortType = req.params.sortType;
-    switch (sortType) {
+const Constant = require("../constant");
+function getsortType(index) {
+    var sort = 0;
+    switch (index) {
         case "0":
             sort = {};
             break;
         case "1":
-            sort = {};
+            sort = { name: 1 };
             break;
         case "2":
             sort = { price: -1 };
@@ -36,28 +18,61 @@ exports.sort = async (req, res, next) => {
             sort = { price: 1 };
             break;
     }
-    const products = await productModel.find({}).sort(sort);
+    return sort;
+}
+exports.index = async (req, res, next) => {
     sess = req.session;
+    var page = +req.query.page || 1;
+    var sortIndex = req.query.sort || 0;
+    const products = await ProductService.listPageProduct(
+        page,
+        Constant.ITEM_PER_PAGE,
+        getsortType(sortIndex)
+    );
     res.render("pages/shop", {
         page: "shop",
-        products: products,
+        products: products.docs,
         cart: sess.Cart,
         login: sess.Login,
-        sortType: sortType,
+        sortType: sortIndex,
+        currentPage: products.page,
+        nextPage: products.nextPage,
+        prevPage: products.prevPage,
+        hasNextPage: products.hasNextPage,
+        hasPrevPage: products.hasPrevPage,
+        totalPages: products.totalPages,
     });
+};
+exports.cart = async (req, res, next) => {
+    req.session.Cart = req.body;
+    sess = req.session;
+    console.log(sess);
+    res.end("done");
 };
 exports.filter = async (req, res, next) => {
     sess = req.session;
-    const type = req.params.type;
-    const products = productModel.find({ type: type });
-    sess = req.session;
+    var page = +req.query.page || 1;
+    var sortIndex = req.query.sort || 0;
+    var filter = { type: req.params.type };
+    const products = await ProductService.listPageProduct(
+        page,
+        Constant.ITEM_PER_PAGE,
+        getsortType(sortIndex),
+        filter
+    );
     res.render("pages/shop", {
         page: "shop",
-        products: products,
+        products: products.docs,
         cart: sess.Cart,
         login: sess.Login,
-        sortType: sortType,
-        filter: type,
+        sortType: sortIndex,
+        currentPage: products.page,
+        nextPage: products.nextPage,
+        prevPage: products.prevPage,
+        hasNextPage: products.hasNextPage,
+        hasPrevPage: products.hasPrevPage,
+        totalPages: products.totalPages,
+        filter: req.params.type,
     });
 };
 exports.detail = async (req, res, next) => {

@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
             return validator.isEmail(value);
         },
     },
+    imgSrc: String,
     password: String,
     phoneNumber: String,
     address: String,

@@ -228,9 +228,11 @@
     });
 })(jQuery);
 var logoutBtn = document.getElementsByClassName("logout-btn")[0];
-logoutBtn.addEventListener("click", logout);
+if (logoutBtn) {
+    logoutBtn.addEventListener("click", logout);
+}
 function logout() {
-    fetch("/login/signout", {
+    fetch("/user/signout", {
         method: "POST",
     }).then(() => window.location.reload());
 }
