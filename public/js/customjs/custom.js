@@ -127,14 +127,18 @@
         ],
         responsive: {
             0: {
-                items: 2,
+                items: 1,
                 nav: true,
             },
             600: {
                 items: 3,
                 nav: true,
             },
-            1000: {
+            800: {
+                items: 4,
+                nav: true,
+            },
+            1200: {
                 items: 5,
                 nav: true,
                 loop: true,

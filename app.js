@@ -32,6 +32,17 @@ Handlebars.registerHelper("sortType", function (value, test) {
     if (value == undefined) return "";
     return value == test ? "selected " : "";
 });
+Handlebars.registerHelper("drinkType", function (value) {
+    if (value == "hot")
+        return `  <div class="type-lb">
+                    <p class="sale">Hot</p>
+                </div>`;
+    if (value == "new")
+        return `  <div class="type-lb">
+                    <p class="new">New</p>
+                </div>`;
+    return "";
+});
 
 var blocks = {};
 Handlebars.registerPartials(__dirname + "/views/partials");
