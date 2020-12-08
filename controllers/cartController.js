@@ -1,4 +1,3 @@
-const cartModel = require("../models/cartModel");
 exports.index = (req, res, next) => {
     var sess = req.session;
     res.render("pages/cart", {

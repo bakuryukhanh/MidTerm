@@ -204,9 +204,12 @@
     $(function () {
         $("#slider-range").slider({
             range: true,
-            min: 0,
-            max: 4000,
-            values: [1000, 3000],
+            min: 20000,
+            max: 100000,
+            values: [
+                parseInt($("#minPrice")[0].innerHTML),
+                parseInt($("#maxPrice")[0].innerHTML),
+            ],
             slide: function (event, ui) {
                 $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
             },

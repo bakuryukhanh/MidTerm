@@ -10,6 +10,7 @@ const productsSchema = new mongoose.Schema({
     description: String,
 });
 productsSchema.plugin(mongoosePaginate);
+productsSchema.index({ name: "text" });
 let productModel = mongoose.model("product", productsSchema);
 
 exports.productModel = productModel;

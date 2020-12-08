@@ -24,10 +24,18 @@ exports.index = async (req, res, next) => {
     sess = req.session;
     var page = +req.query.page || 1;
     var sortIndex = req.query.sort || 0;
+    var minPrice = +req.query.minPrice || 0;
+    var maxPrice = +req.query.maxPrice || 100000;
+    var Filter = {};
+    console.log(req.query.keyword);
+    var re = new RegExp("." + req.query.keyword, "i");
+    req.query.keyword ? (Filter.name = { $regex: re }) : 0;
+    Filter.price = { $gte: minPrice, $lte: maxPrice };
     const products = await ProductService.listPageProduct(
         page,
         Constant.ITEM_PER_PAGE,
-        getsortType(sortIndex)
+        getsortType(sortIndex),
+        Filter
     );
     res.render("pages/shop", {
         page: "shop",
@@ -35,12 +43,15 @@ exports.index = async (req, res, next) => {
         cart: sess.Cart,
         login: sess.Login,
         sortType: sortIndex,
+        minPrice: minPrice,
+        maxPrice: maxPrice,
         currentPage: products.page,
         nextPage: products.nextPage,
         prevPage: products.prevPage,
         hasNextPage: products.hasNextPage,
         hasPrevPage: products.hasPrevPage,
         totalPages: products.totalPages,
+        totalProducts: products.totalDocs,
     });
 };
 exports.cart = async (req, res, next) => {
@@ -53,7 +64,12 @@ exports.filter = async (req, res, next) => {
     sess = req.session;
     var page = +req.query.page || 1;
     var sortIndex = req.query.sort || 0;
+    var minPrice = req.query.minPrice || 0;
+    var maxPrice = req.query.maxPrice || 100000;
     var filter = { type: req.params.type };
+    var re = new RegExp("." + req.query.keyword, "i");
+    req.query.keyword ? (filter.name = { $regex: re }) : 0;
+    filter.price = { $gte: minPrice, $lte: maxPrice };
     const products = await ProductService.listPageProduct(
         page,
         Constant.ITEM_PER_PAGE,
@@ -73,6 +89,9 @@ exports.filter = async (req, res, next) => {
         hasPrevPage: products.hasPrevPage,
         totalPages: products.totalPages,
         filter: req.params.type,
+        minPrice: minPrice,
+        maxPrice: maxPrice,
+        totalProducts: products.totalDocs,
     });
 };
 exports.detail = async (req, res, next) => {

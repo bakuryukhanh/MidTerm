@@ -9,10 +9,10 @@ const listPageProduct = async (page, itemPerPage, sort = {}, filter = {}) => {
         limit: itemPerPage,
         sort: sort,
     };
+    console.log(filter);
     var products = await productModel
         .paginate(filter, options)
         .catch((err) => console.log(err));
     return products;
 };
-
 module.exports = { listProduct, listPageProduct };
