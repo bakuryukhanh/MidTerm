@@ -4,6 +4,7 @@ const passport = require("passport"),
 
 const UserService = require("../models/services/UserServices");
 const User = require("../models/userModel");
+const config = require("../config");
 passport.use(
     new LocalStrategy(
         { usernameField: "email", passwordField: "password" },
@@ -40,9 +41,9 @@ passport.deserializeUser(async function (id, done) {
 passport.use(
     new FacebookStrategy(
         {
-            clientID: process.env.FACEBOOK_APP_ID,
-            clientSecret: process.env.FACEBOOK_APP_SECRET,
-            callbackURL: "/facebook/callback",
+            clientID: config.facebookAuth.clientId,
+            clientSecret: config.facebookAuth.clientSecret,
+            callbackURL: config.facebookAuth.callbackURL,
             profileFields: [
                 "id",
                 "displayName",
