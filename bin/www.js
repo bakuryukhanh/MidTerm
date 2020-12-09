@@ -1,7 +1,7 @@
 require("dotenv").config();
 const app = require("../app");
 const mongoose = require("../mongoose/mongoose");
-const http = require("http");
+const http = require("https");
 
 var port = normalizePort(process.env.PORT || "8080");
 
