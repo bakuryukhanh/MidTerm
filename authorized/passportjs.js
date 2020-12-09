@@ -42,7 +42,7 @@ passport.use(
         {
             clientID: process.env.FACEBOOK_APP_ID,
             clientSecret: process.env.FACEBOOK_APP_SECRET,
-            callbackURL: "http://localhost:8080/facebook/callback",
+            callbackURL: "/facebook/callback",
             profileFields: [
                 "id",
                 "displayName",
