@@ -33,11 +33,9 @@ bg-dark
                     </div>
                     <button class="btn btn-lg btn-primary btn-color-hover btn-block text-uppercase"
                         type="submit">Login</button>
-                    {{!-- <hr class="my-4">
-                    <button class="btn btn-lg btn-google btn-block soi-hv text-uppercase" type="submit"><i
-                            class="fab fa-google mr-2"></i> Sign in with Google</button>
-                    <button class="btn btn-lg btn-facebook btn-block soi-hv  text-uppercase" type="submit"><i
-                            class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button> --}}
+                    <hr class="my-4">
+                    <a href="/auth/facebook" class="btn btn-lg btn-facebook btn-block soi-hv  text-uppercase"
+                        type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</a>
                 </form>
             </div>
             <div class="tab-pane fade" id="nav-signup" role="tabpanel" aria-labelledby="nav-signup-tab">
@@ -76,11 +74,7 @@ bg-dark
 
                     <button class="btn btn-lg btn-primary btn-block btn-color-hover text-uppercase"
                         type="submit">Register</button>
-                    {{!-- <hr class="my-4">
-                    <button class="btn btn-lg btn-google btn-block soi-hv text-uppercase" type="submit"><i
-                            class="fab fa-google mr-2"></i> Sign up with Google</button>
-                    <button class="btn btn-lg btn-facebook btn-block soi-hv text-uppercase" type="submit"><i
-                            class="fab fa-facebook-f mr-2"></i> Sign up with Facebook</button> --}}
+
                 </form>
             </div>
             <div id="dialog">
@@ -90,5 +84,6 @@ bg-dark
     </div>
 </div>
 {{#extend "script"}}
-<script src="/js/customjs/login-form.js"></script>
+<script src="/js/customjs/login-form.js">
+</script>
 {{/extend}}

@@ -5,7 +5,7 @@ exports.index = (req, res, next) => {
     res.render("pages/about", {
         page: "about",
         cart: sess.Cart,
-        login: sess.Login,
+        user: req.user,
         members: members,
     });
 };

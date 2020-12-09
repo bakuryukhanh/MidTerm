@@ -12,7 +12,9 @@ loginForm.addEventListener("submit", (event) => {
             "content-type": "application/json",
         },
     })
-        .then((res) => res.json())
+        .then((res) => {
+            return res.json();
+        })
         .then((res) => {
             if (res.log == "success") {
                 window.location.reload();
@@ -27,7 +29,7 @@ loginForm.addEventListener("submit", (event) => {
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-              <p>Username or password wrong</p>
+              <p>${res.message}</p>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

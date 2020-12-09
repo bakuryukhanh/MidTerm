@@ -4,25 +4,13 @@ const UserServices = require("../models/services/UserServices");
 const formidable = require("formidable");
 
 exports.index = (req, res, next) => {
-    var sess = req.session;
-    if (sess.Login) {
+    if (req.user) {
         res.redirect("/");
     }
     res.render("pages/login-signup");
 };
-exports.login = async (req, res, next) => {
-    var sess;
-    const user = await userModel.findOne(req.body).catch((err) => {
-        console.err(err);
-    });
-    if (user != null) {
-        console.log(user);
-        req.session.Login = user;
-        sess = req.session;
-        res.json({ log: "success" });
-    } else {
-        res.json({ log: "failed" });
-    }
+exports.login = (req, res, next) => {
+    res.json({ log: "success" });
 };
 exports.signup = async (req, res, next) => {
     const form = formidable({ multiples: true });
@@ -67,7 +55,6 @@ exports.updateAva = async (req, res, next) => {
     });
 };
 exports.signout = (req, res, next) => {
-    sess = req.session;
-    sess.Login = null;
-    res.end("done");
+    req.logout();
+    res.redirect("/");
 };

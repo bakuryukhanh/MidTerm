@@ -1,9 +1,14 @@
+//npm packages
+
 const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const logger = require("morgan");
 const Handlebars = require("hbs");
+const { passport } = require("./authorized/passportjs");
+
+//Routes
 const homeRouter = require("./routers/home");
 const aboutRouter = require("./routers/about");
 const checkoutRouter = require("./routers/checkout");
@@ -85,6 +90,16 @@ app.use(
         saveUninitialized: true,
         secret: "somesecret",
         cookie: { maxAge: 600000 },
+    })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+app.get("/auth/facebook", passport.authenticate("facebook"));
+app.get(
+    "/facebook/callback",
+    passport.authenticate("facebook", {
+        successRedirect: "/",
+        failureRedirect: "/user/login",
     })
 );
 

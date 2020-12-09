@@ -2,16 +2,16 @@
     <div class="container-fluid ">
         <div class="loginbar">
             <div class=" login-signup">
-                <a class="btn btn-primary btn-lg {{#if login}}hidden{{/if}}" href="/user">Login</a>
+                <a class="btn btn-primary btn-lg {{#if user}}hidden{{/if}}" href="/user">Login</a>
             </div>
-            <div class="login-info {{#if login}}{{else}}hidden{{/if}}">
+            <div class="login-info {{#if user}}{{else}}hidden{{/if}}">
                 <a href="/account">
-                    <img class="avatar rounded-circle" src="{{login.imgSrc}}" style=" height:50px;width:50px "
+                    <img class="avatar rounded-circle" src="{{user.imgSrc}}" style=" height:50px;width:50px "
                         alt="avatar">
-                    <span style="color: #ffffff;">{{login.name}}</span>
+                    <span style="color: #ffffff;">{{user.name}}</span>
                 </a>
 
-                <button class="btn hvr-hover logout-btn custom-btn">Sign out</button>
+                <a href="user/signout" class="btn hvr-hover logout-btn custom-btn">Sign out</a>
             </div>
 
         </div>
