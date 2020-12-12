@@ -9,5 +9,9 @@ router.post("/login", loginAuthenrize, userController.login);
 router.post("/signup", userController.signup);
 router.get("/signout", userController.signout);
 router.post("/updateAva", userController.updateAva);
+router.get("/fav-list", userController.getFavList);
+router.post("/fav-list", userController.add2FavList);
+router.get("/history", userController.getHistory);
+router.post("/history", userController.add2History);
 
 module.exports = router;

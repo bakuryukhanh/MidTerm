@@ -47,14 +47,50 @@ exports.updateAva = async (req, res, next) => {
                 (url) => (fields.imgSrc = url)
             );
         }
-        await UserServices.updateAva(req.session.Login._id, fields.imgSrc);
-        console.log(req.session.Login.imgSrc);
-        req.session.Login.imgSrc = fields.imgSrc;
-        console.log(req.session.Login.imgSrc);
+        await UserServices.updateAva(req.user._id, fields.imgSrc);
+        console.log(req.user.imgSrc);
+        req.user.imgSrc = fields.imgSrc;
+        console.log(req.user.imgSrc);
         res.json({ log: "success" });
     });
 };
 exports.signout = (req, res, next) => {
     req.logout();
     res.redirect("/");
+};
+exports.getFavList = async (req, res, next) => {
+    if (!req.user) {
+        res.send("You need to sign in");
+        return;
+    }
+    const favList = await UserServices.getFavouriteList(req.user._id);
+    //render favList
+    res.json(favList);
+};
+exports.add2FavList = async (req, res, next) => {
+    if (!req.user) {
+        res.send("You need to sign in");
+        return;
+    }
+    var productId = req.body.id;
+    await UserServices.add2FavouriteList(req.user._id, productId);
+    res.end("done");
+};
+exports.getHistory = async (req, res, next) => {
+    if (!req.user) {
+        res.send("You need to sign in");
+        return;
+    }
+    const History = await UserServices.getBills(req.user._id);
+    //render History
+    res.json(History);
+};
+exports.add2History = async (req, res, next) => {
+    if (!req.user) {
+        res.send("You need to sign in");
+        return;
+    }
+    var BillId = req.body.id;
+    await UserServices.addBill(req.user._id, BillId);
+    res.end("done");
 };

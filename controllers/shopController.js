@@ -2,6 +2,7 @@ const ProductService = require("../models/services/productServices");
 const { productModel } = require("../models/productModel");
 const { ObjectId } = require("mongodb");
 const Constant = require("../constant");
+const productServices = require("../models/services/productServices");
 function getsortType(index) {
     var sort = 0;
     switch (index) {
@@ -27,9 +28,6 @@ exports.index = async (req, res, next) => {
     var minPrice = +req.query.minPrice || 0;
     var maxPrice = +req.query.maxPrice || 100000;
     var Filter = {};
-    console.log(req.query.keyword);
-    var re = new RegExp("." + req.query.keyword, "i");
-    req.query.keyword ? (Filter.name = { $regex: re }) : 0;
     Filter.price = { $gte: minPrice, $lte: maxPrice };
     const products = await ProductService.listPageProduct(
         page,
@@ -97,11 +95,45 @@ exports.filter = async (req, res, next) => {
 exports.detail = async (req, res, next) => {
     sess = req.session;
     const id = req.params.id;
-    const products = await productModel.findOne({ _id: ObjectId(id) });
+    const product = await productModel.findOne({ _id: ObjectId(id) });
     res.render("pages/detail", {
         page: "shop",
         cart: sess.Cart,
-        login: sess.Login,
-        product: products,
+        user: req.user,
+        product: product,
     });
+};
+exports.search = async (req, res, next) => {
+    var keyword = req.body.keyword;
+    keyword = keyword.normalize("NFC");
+    console.log(req.query.keyword);
+    var re = new RegExp(keyword, "gi");
+
+    var filter = {};
+    filter = { name: { $regex: re } };
+    const results = await ProductService.listPageProduct(
+        undefined,
+        undefined,
+        undefined,
+        filter
+    );
+    console.log(results.docs);
+    res.json(results.docs);
+};
+exports.getComments = async (req, res, next) => {
+    const comments = await productServices.getComments(req.params.productId);
+
+    res.json(comments);
+};
+exports.postComment = async (req, res, next) => {
+    if (!req.user) {
+        res.json("You haven't signed in, Signing in to post comment");
+        return;
+    }
+    var newComment = req.body;
+    newComment.user = req.user;
+    await productServices
+        .postComment(newComment, req.params.productId)
+        .catch((err) => res.json(err));
+    res.json({ log: "success", comment: newComment });
 };

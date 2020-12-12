@@ -3,25 +3,24 @@ const userSchema = new mongoose.Schema({
     name: String,
     email: {
         type: String,
-        required: true,
+        required: function () {
+            if (this.facebookId == null && this.googleId == null) {
+                return true;
+            }
+            return false;
+        },
+        index: true,
+        sparse: true,
         unique: true,
-        lowercase: true,
     },
     imgSrc: String,
     password: String,
     phoneNumber: String,
     address: String,
     facebookId: String,
+    googleId: String,
+    bills: Array,
+    favouriteList: Array,
 });
 let userModel = mongoose.model("user", userSchema);
-const FBUserShema = new mongoose.Schema({
-    name: String,
-    facebookId: {
-        type: String,
-        required: true,
-    },
-    imgSrc: String,
-});
-let FBUserModel = mongoose.model("FBuser", FBUserShema);
-module.exports.FBuserModel = FBUserModel;
 module.exports.userModel = userModel;

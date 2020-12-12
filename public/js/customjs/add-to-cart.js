@@ -51,10 +51,10 @@ function addToCartClicked(event) {
     updateCartTotal();
 }
 
-function addItemToCart(title, price, imageSrc) {
+function addItemToCart(title, price, imageSrc, qty = 1) {
     var cartRow = document.createElement("li");
     cartRow.classList.add("cart-row");
-    var quantity = 1;
+    var quantity = qty;
     var cartItems = document.getElementsByClassName("cart-list")[0];
     var cartRows = cartItems.getElementsByClassName("cart-row");
     for (var i = 0; i < cartRows.length; i++) {
@@ -63,7 +63,7 @@ function addItemToCart(title, price, imageSrc) {
         if (name == title) {
             quantity = cartRows[i].getElementsByClassName("quantity")[0]
                 .innerText;
-            quantity = parseInt(quantity) + 1;
+            quantity = parseInt(quantity) + qty;
             cartRows[i].getElementsByClassName(
                 "quantity"
             )[0].innerHTML = quantity;

@@ -93,11 +93,15 @@
             </div>
             <div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
                 <div class="product-categori">
-                    <div class="search-product">
-                        <form>
-                            <input class="form-control" id="search-value" placeholder="Search here..." type="text">
-                            <button type="submit" id="search-btn"> <i class="fa fa-search"></i> </button>
-                        </form>
+                    <div class="search-product dropdown">
+
+                        <input id="search-value" data-toggle="dropdown" autocomplete="off" aria-haspopup="true"
+                            aria-expanded="true" placeholder="Search here..." type="text">
+                        <button class="dropdown-toggle" id="search-btn"> <i class="fa fa-search"></i> </button>
+
+                        <div class="dropdown-menu search-dropdown" aria-labelledby="search-btn">
+
+                        </div>
                     </div>
                     <div class="filter-sidebar-left">
                         <div class="title-left">

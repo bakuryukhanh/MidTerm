@@ -15,6 +15,13 @@
     line-height: 100%;
     font-weight: bold;
 }
+.account-dropdown {
+    top: 0;
+    left: -150px;
+}
+.login-info > li {
+    display: inline-block;
+}
 .login-info a {
     color: white;
 }
@@ -252,4 +259,23 @@
     to {
         -webkit-transform: rotate(360deg);
     }
+}
+.search-dropdown {
+    width: 100%;
+}
+.result-item {
+    display: flex;
+    align-items: center;
+}
+.result-item > img {
+    width: 30px;
+    border-radius: 20%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.success {
+    color: green;
+}
+.failed {
+    color: red;
 }

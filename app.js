@@ -102,7 +102,19 @@ app.get(
         failureRedirect: "/user/login",
     })
 );
-
+app.get(
+    "/auth/google",
+    passport.authenticate("google", {
+        scope: ["profile"],
+    })
+);
+app.get(
+    "/google/callback",
+    passport.authenticate("google", {
+        successRedirect: "/",
+        failureRedirect: "/user/login",
+    })
+);
 app.use("/", homeRouter);
 app.use("/about", aboutRouter);
 app.use("/gallery", galleryRouter);

@@ -8,6 +8,7 @@ const productsSchema = new mongoose.Schema({
     more: String,
     formular: String,
     description: String,
+    comments: Array,
 });
 productsSchema.plugin(mongoosePaginate);
 productsSchema.index({ name: "text" });

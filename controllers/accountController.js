@@ -1,4 +1,7 @@
 exports.index = (req, res, next) => {
-    var sess = req.session;
-    res.render("pages/account", { page: "account", login: sess.Login });
+    if (!req.user) {
+        res.status(401);
+        res.send("you need to login");
+    }
+    res.render("pages/account", { page: "account", user: req.user });
 };

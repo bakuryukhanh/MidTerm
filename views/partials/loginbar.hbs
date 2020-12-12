@@ -10,8 +10,24 @@
                         alt="avatar">
                     <span style="color: #ffffff;">{{user.name}}</span>
                 </a>
-
-                <a href="user/signout" class="btn hvr-hover logout-btn custom-btn">Sign out</a>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown"><i class="fas fa-caret-down fa-fw"
+                            style="background-color: black;transform: scale(1.5,1.5);"></i></a>
+                    <ul class="dropdown-menu account-dropdown" style="background-color: black;">
+                        <li><a href="/account" style="color: white"><i class="fas fa-user mx-2"></i>My account</a></li>
+                        <hr>
+                        <li><a href="/user/fa-list" style="color: white;"><i class="fas fa-heart mx-2"></i>Favourite
+                                List</a>
+                        </li>
+                        <hr>
+                        <li><a href="/user/history" style="color: white;"><i class="fas fa-history mx-2"></i>Purchased
+                                History</a></li>
+                        <hr>
+                        <li><a href="/user/signout" style="color: white;"><i class="fas fa-sign-out-alt mx-2"></i>Log
+                                out</a>
+                        </li>
+                    </ul>
+                </li>
             </div>
 
         </div>

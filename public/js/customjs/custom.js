@@ -211,8 +211,12 @@
             min: 20000,
             max: 100000,
             values: [
-                parseInt($("#minPrice")[0].innerHTML),
-                parseInt($("#maxPrice")[0].innerHTML),
+                $("#minPrice")[0]
+                    ? parseInt($("#minPrice")[0].innerHTML)
+                    : 20000,
+                $("#maxPrice")[0]
+                    ? parseInt($("#maxPrice")[0].innerHTML)
+                    : 100000,
             ],
             slide: function (event, ui) {
                 $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);

@@ -47,14 +47,39 @@ function PriceFilter() {
     var parts = string.split("?");
     window.location.href = "?" + parts[1];
 }
-var searchBtn = document.getElementById("search-btn");
-searchBtn.addEventListener("click", Search);
+var searchValue = document.getElementById("search-value");
+searchValue.addEventListener("input", Search);
+searchValue.addEventListener("focus", onFocus);
+function onFocus() {
+    console.log("focus");
+}
+
 function Search(event) {
     event.preventDefault();
-    var searchValue = document.getElementById("search-value").value;
-    var uri = document.location;
-
-    var string = updateUrlParameter(uri.href, "keyword", searchValue);
-    var parts = string.split("?");
-    window.location.href = "?" + parts[1];
+    const searchValue = event.target.value;
+    fetch("/shop/api/product/search", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ keyword: searchValue }),
+    })
+        .then((res) => res.json())
+        .then((products) => {
+            var dropdownMenu = $(
+                ".search-product.dropdown>div.dropdown-menu"
+            )[0];
+            dropdownMenu.innerHTML = "";
+            products.forEach((product) => {
+                var divTag = document.createElement("div");
+                divTag.classList.add("result-item");
+                divTag.innerHTML = `
+                <img src="${product.imgSrc}" alt="image">
+                <a href="/shop/${product._id}">${product.name}</a>
+                `;
+                dropdownMenu.append(divTag);
+                var hr = document.createElement("hr");
+                dropdownMenu.append(hr);
+            });
+        });
 }

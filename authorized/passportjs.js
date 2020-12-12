@@ -1,6 +1,7 @@
 const passport = require("passport"),
     LocalStrategy = require("passport-local").Strategy,
-    FacebookStrategy = require("passport-facebook").Strategy;
+    FacebookStrategy = require("passport-facebook").Strategy,
+    GoogleStrategy = require("passport-google-oauth20").Strategy;
 
 const UserService = require("../models/services/UserServices");
 const User = require("../models/userModel");
@@ -16,6 +17,7 @@ passport.use(
                 return done(err);
             });
             if (!user) {
+                console.log("failed");
                 return done(null, false, {
                     message: "Username or password wrong",
                 });
@@ -24,19 +26,6 @@ passport.use(
         }
     )
 );
-passport.serializeUser(function (user, done) {
-    console.log(user.id);
-    done(null, user.id);
-});
-
-passport.deserializeUser(async function (id, done) {
-    var user;
-    const normalUser = await User.userModel.findById(id);
-    if (normalUser) user = normalUser;
-    const FBUser = await User.FBuserModel.findById(id);
-    if (FBUser) user = FBUser;
-    done(null, user);
-});
 
 passport.use(
     new FacebookStrategy(
@@ -59,19 +48,43 @@ passport.use(
         }
     )
 );
+
+passport.use(
+    new GoogleStrategy(
+        {
+            clientID: config.googleAuth.clientId,
+            clientSecret: config.googleAuth.clientSecret,
+            callbackURL: "/google/callback",
+        },
+        async function (token, tokenSecret, profile, done) {
+            const user = await UserService.FindOrCreateGG(profile);
+            done(null, user);
+        }
+    )
+);
+
+passport.serializeUser(function (user, done) {
+    done(null, user.id);
+});
+
+passport.deserializeUser(async function (id, done) {
+    const normalUser = await User.userModel.findById(id);
+    done(null, normalUser);
+});
 const loginAuthenrize = (req, res, next) => {
     passport.authenticate("local", (err, user, info) => {
         if (err || !user) {
             const error = {};
             error.status = 401;
             error.message = info.message;
-            res.json(error);
+            return res.json(error);
         }
         req.logIn(user, function (err) {
             console.log(err);
             console.log(req.user);
         });
-        return next();
+        next();
     })(req, res, next);
 };
+
 module.exports = { loginAuthenrize, passport };
