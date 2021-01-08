@@ -1,0 +1,62 @@
+{{>loginbar}}
+{{>navbar}}
+<div class="container my-5">
+    <h1 class="display-3 text-center my-5" style="font-weight: bold">Booking Table</h1>
+    <div class="row">
+        <div class="col-lg-6">
+            <h2 class="mx-4">Your information</h2>
+            <form class="form-info " id="info-form">
+                <div class="form-group mx-4">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" class="form-control" name="name" required
+                        data-error="Please enter your name">
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group mx-4">
+                    <label for="phone-number">Phone number:</label>
+                    <input type="text" id="phone-number" class="form-control" name="phone-number" required
+                        data-error="Please enter your phone number">
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group mx-4">
+                    <label for="phone-number">Additional info:</label>
+                    <input type="text" id="optional" class="form-control" name="optional">
+                    <div class="help-block with-errors"></div>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-6 ">
+            <h2 class="mx-4">Booking Info</h2>
+            <form method="POST" class="form-info" id="booking" action="/table-booking">
+                <div class="date-time">
+                    <div class="form-group ml-4">
+                        <label for="phone-number">Date:</label>
+                        <input type="date" id="date" class="form-control" name="date" required>
+                        <div class="help-block with-errors"></div>
+                    </div>
+
+                    <div class="form-group ml-4">
+                        <label for="phone-number">Time:</label>
+                        <input type="time" id="time" class="form-control" name="time" required>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="submit-booking">
+                    <div class="form-group ml-4">
+                        <label for="phone-number">Number of guests:</label>
+                        <input type="number" id="guests" class="form-control" name="guests" required>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary submit-button ml-4">Book</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+</div>
+{{>instagramFeed}}
+{{>footer}}
+{{#extend "script"}}
+<script src="/js/customjs/table-booking.js"></script>
+{{/extend}}

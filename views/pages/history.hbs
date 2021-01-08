@@ -1,0 +1,41 @@
+{{>loginbar}}
+{{>navbar}}
+<div class="container purchase-history">
+    <h1 class="display-4 my-3 text-center">Purchased history</h1>
+    <hr>
+
+    <div class="row ">
+        <div class="col-12 col-lg-2 tools-bar">
+            <div class="search-bill">
+                {{!-- <label for="search-input">Search</label> --}}
+                <input type="text" name="search" id="search-input" placeholder="Search Here">
+                <button> <i class="fa fa-search"></i> </button>
+            </div>
+            <hr>
+            <div class="date-filter">
+
+                <label for="start">Start Date: </label>
+                <input class="form-control" type="date" name="startDate" id="start">
+                <label for="end">End Date: </label>
+                <input class="form-control" type="date" name="endDate" id="end">
+                <button class="btn btn-primary mx-auto" type="submit">Filter</button>
+
+            </div>
+        </div>
+        <div class="history col-12 col-lg-10">
+            {{#each bills}}
+            <div class="bill">
+                <h2>Bill Date: {{date}}</h2>
+                <h2>Total: {{total}}</h2>
+                <a href="/user/history/{{_id}}" class="btn btn-success">View Detail</a>
+                <button class="btn ">Delete</button>
+            </div>
+            <hr>
+            {{/each}}
+
+        </div>
+    </div>
+
+</div>
+{{>instagramFeed}}
+{{>footer}}

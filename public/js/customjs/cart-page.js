@@ -15,6 +15,9 @@ function cartPageReady() {
         var input = quantityInputs[i];
         input.addEventListener("change", quantityChanged);
     }
+    $("div.attr-nav")[0].classList.add("hidden");
+    var couponBtn = document.getElementById("coupon-submit");
+    couponBtn.addEventListener("click", CouponSubmit);
     updateTotalCartPage();
 }
 
@@ -22,12 +25,9 @@ function updateTotalCartPage() {
     var cartItemContainer = document.getElementsByClassName("cart")[0];
     var cartRows = cartItemContainer.getElementsByClassName("cart-item");
     var subtotal = 0;
-    var discount = 10;
     var grandtotal = 0;
-    var couponDiscount = 10;
+    var couponDiscount = +document.getElementById("coupon-value").innerHTML;
     var shipping = 0;
-
-    console.log("update");
     for (var i = 0; i < cartRows.length; i++) {
         var cartRow = cartRows[i];
 
@@ -46,7 +46,7 @@ function updateTotalCartPage() {
     var subtotalElement = document.getElementsByClassName("subtotal")[0];
     subtotalElement.innerHTML = "$" + subtotal;
 
-    grandtotal = subtotal - discount - couponDiscount + shipping;
+    grandtotal = subtotal - couponDiscount + shipping;
     var grandtotalElement = document.getElementsByClassName("grandtotal")[0];
     grandtotalElement.innerHTML = "$" + grandtotal;
 
@@ -89,4 +89,45 @@ function removeButtonsClicked(event) {
     var buttonClicked = event.target;
     buttonClicked.parentElement.parentElement.parentElement.remove();
     updateTotalCartPage();
+}
+function CouponSubmit() {
+    var couponCode = document.getElementById("coupon-input").value;
+    var couponE = document.getElementById("coupon-value");
+    const checkMsg = document.getElementById("check-message");
+    fetch("/discount/check", {
+        method: "POST",
+        body: JSON.stringify({ code: couponCode }),
+        headers: {
+            "content-type": "application/json",
+        },
+    })
+        .then((res) => res.json())
+        .then((discount) => {
+            if (discount.log == "failed") {
+                checkMsg.innerHTML = "Invalid discount code";
+                checkMsg.style.color = "#ff0000";
+                return;
+            }
+            var startDate = StringToDate(discount.startDate);
+            var endDate = StringToDate(discount.endDate);
+            var today = new Date();
+            if (today < startDate) {
+                checkMsg.innerHTML = "Code not take affect yes";
+                checkMsg.style.color = "#ff0000";
+                return;
+            }
+            if (today > endDate) {
+                checkMsg.innerHTML = "Out of date code";
+                checkMsg.style.color = "#ff0000";
+                return;
+            }
+            couponE.innerHTML = discount.value;
+            checkMsg.innerHTML = "Sucess";
+            checkMsg.style.color = "#0f9d58";
+            updateTotalCartPage();
+        });
+}
+function StringToDate(string) {
+    var dateparts = string.split("/");
+    return new Date(+dateparts[2], dateparts[1] - 1, +dateparts[0]);
 }

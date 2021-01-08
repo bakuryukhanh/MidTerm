@@ -108,11 +108,14 @@
                             <div class="rounded p-2 bg-light cart">
                                 {{#each cart}}
                                 <div class="media mb-2 border-bottom">
-                                    <div class="media-body"> <a class="title"> {{title}}</a>
+                                    <div class="media-body"> <a href="/shop/{{id}}" class="title"> {{title}}</a>
                                         <div class="small text-muted">Price: $<span class="price">{{price}}</span><span
                                                 class="mx-2">|</span> Qty:<span class="quantity">
                                                 {{quantity}}</span>
                                             <span class="mx-2">|</span> Subtotal: $<span class="subtotal"></span></div>
+                                    </div>
+                                    <div class="product-image">
+                                        <img src="{{imgSrc}}" alt="">
                                     </div>
                                 </div>
                                 {{/each}}

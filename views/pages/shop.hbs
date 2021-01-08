@@ -57,16 +57,18 @@
                                         <div class="products-single fix">
                                             <div class="box-img-hover">
                                                 {{{drinkType more}}}
+                                                <div class="favorite mt-2 ml-2 hidden">
+                                                    <i class="fas fa-heart fa-2x"></i>
+                                                </div>
                                                 <img src="{{imgSrc}}" class="img-fluid shop-item-img"
                                                     style="max-height:250px;width:100%;object-fit:cover" alt="Image">
                                                 <div class="mask-icon">
                                                     <ul>
-                                                        <li><a href="#" data-toggle="tooltip" data-placement="right"
-                                                                title="View"><i class="fas fa-eye"></i></a></li>
-                                                        <li><a href="#" data-toggle="tooltip" data-placement="right"
-                                                                title="Compare"><i class="fas fa-sync-alt"></i></a>
-                                                        </li>
-                                                        <li><a href="#" data-toggle="tooltip" data-placement="right"
+                                                        <li><a href="/shop/{{_id}}" data-toggle="tooltip"
+                                                                data-placement="right" title="View"><i
+                                                                    class="fas fa-eye"></i></a></li>
+                                                        <li><a href="/api/wishlist/" method="POST" data-toggle="tooltip"
+                                                                data-placement="right" class="wishlist"
                                                                 title="Add to Wishlist"><i class="far fa-heart"></i></a>
                                                         </li>
                                                     </ul>
@@ -75,7 +77,7 @@
                                                 </div>
                                             </div>
                                             <div class="why-text">
-                                                <a href=" /shop/{{_id}}">
+                                                <a href="/shop/{{_id}}">
                                                     <h4 class="product-name shop-item-title text-uppercase">{{name}}
                                                     </h4>
                                                 </a>
@@ -97,7 +99,8 @@
 
                         <input id="search-value" data-toggle="dropdown" autocomplete="off" aria-haspopup="true"
                             aria-expanded="true" placeholder="Search here..." type="text">
-                        <button class="dropdown-toggle" id="search-btn"> <i class="fa fa-search"></i> </button>
+                        <button class="dropdown-toggle" style="height: 55px;" id="search-btn"> <i
+                                class="fa fa-search"></i> </button>
 
                         <div class="dropdown-menu search-dropdown" aria-labelledby="search-btn">
 
@@ -110,74 +113,60 @@
                         <div class="list-group list-group-collapse list-group-sm list-group-tree" id="list-group-men"
                             data-children=".sub-men">
                             <div class="list-group-collapse sub-men">
-                                <a class="list-group-item list-group-item-action" href="#sub-men1"
-                                    data-toggle="collapse" aria-expanded="true" aria-controls="sub-men1">Categories
 
-                                </a>
-                                <div class="collapse {{#if filter}}show{{/if}}" id="sub-men1"
-                                    data-parent="#list-group-men">
-                                    <div class="list-group">
-                                        <a href="/shop/filter/coffee"
-                                            class="list-group-item list-group-item-action {{filters filter "coffee"}}">Coffee
-                                        </a>
-                                        <a href="/shop/filter/tea"
-                                            class="list-group-item list-group-item-action {{filters filter "tea"}}">Tea</a>
-                                        <a href="/shop/filter/milk-tea"
-                                            class="list-group-item list-group-item-action {{filters filter "milk-tea"}}">Milk
-                                            Tea</a>
-                                        <a href="/shop" class="list-group-item list-group-item-action">
-                                            All</a>
-                                    </div>
+
+                                <div class="list-group">
+                                    <a href="/shop" class="list-group-item list-group-item-action">
+                                        All</a>
+                                    <a href="/shop/filter/coffee"
+                                        class="list-group-item list-group-item-action {{filters filter "coffee"}}">Coffee
+                                    </a>
+                                    <a href="/shop/filter/tea"
+                                        class="list-group-item list-group-item-action {{filters filter "tea"}}">Tea</a>
+                                    <a href="/shop/filter/milk-tea"
+                                        class="list-group-item list-group-item-action {{filters filter "milk-tea"}}">Milk
+                                        Tea</a>
+
                                 </div>
+
                             </div>
-                            <div class="list-group-collapse sub-men">
 
-                                <div class="collapse" id="sub-men2" data-parent="#list-group-men">
-                                    <div class="list-group">
-                                        <a href="/shop/filter/coffee"
-                                            class="list-group-item list-group-item-action">Coffee</a>
-                                        <a href="/shop/filter/tea"
-                                            class="list-group-item list-group-item-action">Tea</a>
-                                        <a href="/shop/filter/milk-tea"
-                                            class="list-group-item list-group-item-action">Milk
-                                            Tea</a>
+                        </div>
+                        <div class="list-group">
+                            <a href="/shop/filter/new"
+                                class="list-group-item list-group-item-action {{filters filter "new"}}">New</a>
+                            <a href="/shop/filter/hot"
+                                class="list-group-item list-group-item-action {{filters filter "hot"}}">Hot</a>
+                            <a href="/shop/filter/sale"
+                                class="list-group-item list-group-item-action {{filters filter "sale"}}">Sale
+                            </a>
 
-                                    </div>
-                                </div>
-                            </div>
-                            {{!-- <div class="list-group">
-                                <a href="/shop/filter/new"
-                                    class="list-group-item list-group-item-action {{filters filter "new"}}">New</a>
-                                <a href="/shop/filter/hot"
-                                    class="list-group-item list-group-item-action {{filters filter "hot"}}">Hot</a>
-                                <a href="/shop/filter/sale"
-                                    class="list-group-item list-group-item-action {{filters filter "sale"}}">Sale
-                                </a>
-
-                            </div> --}}
                         </div>
                     </div>
-                    <div class="filter-price-left">
-                        <div class="title-left">
-                            <h3>Price</h3>
-                        </div>
-                        <div class="price-box-slider">
-                            <div id="minPrice" style="display: none;">{{minPrice}}</div>
-                            <div id="maxPrice" style="display: none;">{{maxPrice}}</div>
-                            <div id="slider-range"></div>
-                            <p>
-                                <input type="text" id="amount" readonly
-                                    style="border:0; color:#fbb714; font-weight:bold;">
-                                <button class="btn hvr-hover" type="submit" id="filter-submit">Filter</button>
-                            </p>
-                        </div>
+                </div>
+                <div class="filter-price-left">
+                    <div class="title-left">
+                        <h3>Price</h3>
+                    </div>
+                    <div class="price-box-slider">
+                        <div id="minPrice" style="display: none;">{{minPrice}}</div>
+                        <div id="maxPrice" style="display: none;">{{maxPrice}}</div>
+                        <div id="slider-range"></div>
+                        <p>
+                            <input type="text" id="amount" readonly style="border:0; color:#fbb714; font-weight:bold;">
+                            <button class="btn hvr-hover" type="submit" id="filter-submit">Filter</button>
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+</div>
 {{>instagramFeed}}
 {{>footer}}
+{{#extend "script"}}
 <script src="/static/js/customjs/shop-page.js"></script>
+<script src="/static/js/customjs/add-to-cart.js"></script>
+{{/extend}}
 <!-- End Shop Page -->

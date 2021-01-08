@@ -1,0 +1,70 @@
+{{>loginbar}}
+{{>navbar}}
+<div class="container my-5">
+    <div class="ship-info">
+        <p class="h1">Shipping Info</p>
+        <p class="h3">Receive name: {{bill.customerName}}</p>
+        <p class="h3">Shipping Adress: {{bill.customerAddress}}</p>
+        <p class="h3">Phone number:{{bill.customerPhone}}</p>
+        <p class="h3">Order Date: {{bill.date}}</p>
+        <p class="h3">Status: {{bill.status}}</p>
+        <p class="h3">Product List: </p>
+    </div>
+
+    <div class="products-list">
+        <div class="col-lg-12">
+            <div class="table-main table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Images</th>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Sub total</th>
+
+                        </tr>
+                    </thead>
+                    <tbody class="cart">
+                        {{#each bill.productList}}
+                        <tr class="cart-item">
+                            <td class="thumbnail-img">
+                                <a href="/shop/{{id}}">
+                                    <img class="img-fluid item-img" src="{{imgSrc}}" alt="" />
+                                </a>
+                            </td>
+                            <td class="name-pr">
+                                <a href="#" class="item-title">
+                                    {{name}}
+                                </a>
+                            </td>
+                            <td class="price-pr">
+                                <p class="price">$ {{price}}</p>
+                            </td>
+                            <td class="quantity-box">
+                                <p class="table-qty">{{quantity}}</p>
+                            </td>
+                            <td class="total-pr">
+                                <p class="subtotal">$ 80.0</p>
+                            </td>
+
+                        </tr>
+                        {{/each}}
+
+                    </tbody>
+                </table>
+            </div>
+            <p class="h3">Shipping Fee: {{bill.shipping}}</p>
+            <p class="h3">Discount: {{bill.discountCode}}</p>
+            <hr>
+            <p class="h2">Total: {{bill.total}}</p>
+        </div>
+
+    </div>
+
+</div>
+{{>instagramFeed}}
+{{>footer}}
+{{#extend "script"}}
+<script src="/js/customjs/update-subtotal.js"></script>
+{{/extend}}

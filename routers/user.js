@@ -12,6 +12,7 @@ router.post("/updateAva", userController.updateAva);
 router.get("/fav-list", userController.getFavList);
 router.post("/fav-list", userController.add2FavList);
 router.get("/history", userController.getHistory);
+router.get("/history/:id", userController.getHistoryDetail);
 router.post("/history", userController.add2History);
 
 module.exports = router;

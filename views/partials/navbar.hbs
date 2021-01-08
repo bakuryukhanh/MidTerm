@@ -15,9 +15,9 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                    <li class="nav-item {{pages page "home"}}"><a class="nav-link" href="/">Home</a></li>
-                    <li class="nav-item {{pages page "about"}}"><a class="nav-link" href="/about">About Us</a></li>
-                    <li class="dropdown {{pages page "shop"}}">
+                    <li class="nav-item {{pages page " home"}}"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item {{pages page " about"}}"><a class="nav-link" href="/about">About Us</a></li>
+                    <li class="dropdown {{pages page " shop"}}">
                         <a href="/shop" class="nav-link dropdown-toggle arrow " data-toggle="dropdown">SHOP</a>
                         <ul class="dropdown-menu">
                             <li><a href="/shop">Sidebar Shop</a></li>
@@ -26,9 +26,9 @@
                             <li><a href="/account">My Account</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item {{pages page "gallery"}}"><a class="nav-link" href="/gallery">Gallery</a>
+                    <li class="nav-item {{pages page " gallery"}}"><a class="nav-link" href="/gallery">Gallery</a>
                     </li>
-                    <li class="nav-item {{pages page "contact"}}"><a class="nav-link" href="/contact">Contact
+                    <li class="nav-item {{pages page " contact"}}"><a class="nav-link" href="/contact">Contact
                             Us</a></li>
                 </ul>
             </div>
@@ -40,7 +40,7 @@
                     <li class="side-menu">
                         <a href="#">
                             <i class="fa fa-shopping-bag"></i>
-                            <span class="badge">0</span>
+                            <span class="badge cart-count hidden"></span>
                             <p>My Cart</p>
                         </a>
                     </li>
@@ -54,14 +54,15 @@
             <a href="#" class="close-side"><i class="fa fa-times"></i></a>
             <li class="cart-box">
                 <ul class="cart-list">
-                    {{#each cart}}
-                    <li class="cart-row">
-                        <a href="#" class="photo"><img src={{imgSrc}} class="cart-thumb" alt="" /></a>
-                        <h6><a href="#" class="cart-item-title">{{title}} </a></h6>
-                        <p><span class="quantity">{{quantity}}</span> x -<span class="price">${{price}}</span></p>
-                    </li>
-                    {{/each}}
-
+                    <div class="item-list">
+                        {{#each cart}}
+                        <li class="cart-row">
+                            <a href="/shop/{{id}}" class="photo"><img src={{imgSrc}} class="cart-thumb" alt="" /></a>
+                            <h6><a href="/shop/{{id}}" class="cart-item-title">{{title}} </a></h6>
+                            <p><span class="quantity">{{quantity}}</span> x -<span class="price">${{price}}</span></p>
+                        </li>
+                        {{/each}}
+                    </div>
                     <li class="total">
                         <a href="/cart" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
                         <strong>Total</strong><span class="float-right cart-total-price">:

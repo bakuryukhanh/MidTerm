@@ -1,3 +1,9 @@
+if (document.readyState == "loading") {
+    document.addEventListener("DOMContentLoaded", wishListHandle);
+} else {
+    wishListHandle();
+}
+
 var sort = document.getElementById("basic");
 sort.addEventListener("change", SortProducts);
 function SortProducts(event) {
@@ -82,4 +88,109 @@ function Search(event) {
                 dropdownMenu.append(hr);
             });
         });
+}
+function wishListHandle() {
+    var wishListA = document.getElementsByClassName("wishlist");
+    var productListE = document.getElementsByClassName("products-single");
+    for (let i = 0; i < wishListA.length; i++) {
+        wishListA[i].addEventListener("click", addToWishList);
+    }
+    fetch("api/wishlist", {
+        method: "GET",
+    })
+        .then((res) => {
+            if (res.status == 401) {
+                throw new Error("Access Denied");
+            } else {
+                return res.json();
+            }
+        })
+        .then((FavList) => {
+            for (let i = 0; i < productListE.length; i++) {
+                var id = productListE[i]
+                    .getElementsByTagName("a")[0]
+                    .getAttribute("href")
+                    .split("/")[2];
+                if (!FavList || FavList == {}) {
+                    return;
+                }
+
+                if (FavList.includes(id)) {
+                    productListE[i]
+                        .getElementsByClassName("favorite")[0]
+                        .classList.remove("hidden");
+                    var favIcon = productListE[i].getElementsByClassName(
+                        "wishlist"
+                    )[0];
+                    favIcon.setAttribute("title", "Remove from Wishlist");
+                    favIcon.setAttribute("href", "api/wishlist/" + id);
+                    favIcon.setAttribute(
+                        "data-original-title",
+                        "Remove from Wishlist"
+                    );
+                    favIcon.setAttribute("method", "DELETE");
+                }
+            }
+        })
+        .catch((err) => console.log(err));
+}
+function addToWishList(event) {
+    event.preventDefault();
+    var iconE = event.target;
+    var link =
+        iconE.getAttribute("href") || iconE.parentElement.getAttribute("href");
+    var method =
+        iconE.getAttribute("method") ||
+        iconE.parentElement.getAttribute("method");
+    console.log(method);
+    var string =
+        iconE.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.getAttribute(
+            "href"
+        ) ||
+        iconE.parentElement.parentElement.firstElementChild.firstElementChild.getAttribute(
+            "href"
+        );
+    var id = string.split("/")[2];
+    fetch(link, {
+        method: method,
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: id }),
+    }).then(() => {
+        if (method == "POST") {
+            set2Delete(iconE);
+        }
+        if (method == "DELETE") {
+            console.log("add");
+            set2Add(iconE);
+        }
+    });
+}
+function set2Delete(iconE) {
+    var productE =
+        iconE.parentElement.parentElement.parentElement.parentElement
+            .parentElement.parentElement;
+    var id = productE
+        .getElementsByTagName("a")[0]
+        .getAttribute("href")
+        .split("/")[2];
+    var favIcon = productE.getElementsByClassName("wishlist")[0];
+    productE.getElementsByClassName("favorite")[0].classList.remove("hidden");
+    favIcon.setAttribute("title", "Remove from Wishlist");
+    favIcon.setAttribute("href", "api/wishlist/" + id);
+    favIcon.setAttribute("data-original-title", "Remove from Wishlist");
+    favIcon.setAttribute("method", "DELETE");
+}
+function set2Add(iconE) {
+    var productE =
+        iconE.parentElement.parentElement.parentElement.parentElement
+            .parentElement.parentElement;
+    var favIcon = productE.getElementsByClassName("wishlist")[0];
+    console.log(favIcon);
+    productE.getElementsByClassName("favorite")[0].classList.add("hidden");
+    favIcon.setAttribute("title", "Add to WishList");
+    favIcon.setAttribute("href", "api/wishlist/");
+    favIcon.setAttribute("data-original-title", "Add to WishList");
+    favIcon.setAttribute("method", "POST");
 }

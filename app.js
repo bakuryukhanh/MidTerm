@@ -19,7 +19,9 @@ const shopRouter = require("./routers/shop");
 const cartRouter = require("./routers/cart");
 const userRouter = require("./routers/user");
 const discountRouter = require("./routers/discount");
-
+const TableBookingRouter = require("./routers/TableBooking");
+//api
+const WishListAPI = require("./api/FavListAPI");
 const app = express();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
@@ -48,7 +50,6 @@ Handlebars.registerHelper("drinkType", function (value) {
                 </div>`;
     return "";
 });
-
 var blocks = {};
 Handlebars.registerPartials(__dirname + "/views/partials");
 Handlebars.registerHelper("extend", function (name, context) {
@@ -89,7 +90,7 @@ app.use(
         resave: true,
         saveUninitialized: true,
         secret: "somesecret",
-        cookie: { maxAge: 600000 },
+        cookie: { maxAge: 1000 * 60 * 60 * 24 },
     })
 );
 app.use(passport.initialize());
@@ -115,6 +116,7 @@ app.get(
         failureRedirect: "/user/login",
     })
 );
+app.use("/api/wishlist", WishListAPI);
 app.use("/", homeRouter);
 app.use("/about", aboutRouter);
 app.use("/gallery", galleryRouter);
@@ -125,5 +127,6 @@ app.use("/account", accountRouter);
 app.use("/checkout", checkoutRouter);
 app.use("/user", userRouter);
 app.use("/discount", discountRouter);
+app.use("/table-booking", TableBookingRouter);
 
 module.exports = app;

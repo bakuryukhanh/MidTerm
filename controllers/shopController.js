@@ -3,6 +3,7 @@ const { productModel } = require("../models/productModel");
 const { ObjectId } = require("mongodb");
 const Constant = require("../constant");
 const productServices = require("../models/services/productServices");
+const UserServices = require("../models/services/UserServices");
 function getsortType(index) {
     var sort = 0;
     switch (index) {
@@ -23,6 +24,10 @@ function getsortType(index) {
 }
 exports.index = async (req, res, next) => {
     sess = req.session;
+    var FavList;
+    if (req.user) {
+        FavList = await UserServices.getFavouriteList(req.user.id);
+    }
     var page = +req.query.page || 1;
     var sortIndex = req.query.sort || 0;
     var minPrice = +req.query.minPrice || 0;
@@ -35,6 +40,7 @@ exports.index = async (req, res, next) => {
         getsortType(sortIndex),
         Filter
     );
+    console.log(FavList);
     res.render("pages/shop", {
         page: "shop",
         products: products.docs,
@@ -50,12 +56,12 @@ exports.index = async (req, res, next) => {
         hasPrevPage: products.hasPrevPage,
         totalPages: products.totalPages,
         totalProducts: products.totalDocs,
+        favList: FavList,
     });
 };
 exports.cart = async (req, res, next) => {
     req.session.Cart = req.body;
     sess = req.session;
-    console.log(sess);
     res.end("done");
 };
 exports.filter = async (req, res, next) => {
@@ -106,7 +112,7 @@ exports.detail = async (req, res, next) => {
 exports.search = async (req, res, next) => {
     var keyword = req.body.keyword;
     keyword = keyword.normalize("NFC");
-    console.log(req.query.keyword);
+
     var re = new RegExp(keyword, "gi");
 
     var filter = {};
@@ -117,7 +123,6 @@ exports.search = async (req, res, next) => {
         undefined,
         filter
     );
-    console.log(results.docs);
     res.json(results.docs);
 };
 exports.getComments = async (req, res, next) => {

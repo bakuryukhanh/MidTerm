@@ -71,21 +71,18 @@
         </div>
 
         <div class="row my-5">
-            <div class="col-lg-6 col-sm-6">
+            <div class="col-lg-8 col-sm-12"></div>
+            <div class="col-lg-4 col-sm-12">
                 <div class="coupon-box">
                     <div class="input-group input-group-sm">
-                        <input class="form-control" placeholder="Enter your coupon code" aria-label="Coupon code"
-                            type="text">
+                        <input class="form-control" placeholder="Enter your coupon code" id="coupon-input"
+                            aria-label="Coupon code" type="text">
                         <div class="input-group-append">
-                            <button class="btn btn-theme" type="button">Apply Coupon</button>
+                            <button class="btn btn-theme" id="coupon-submit" type="button">Apply Coupon</button>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-6 col-sm-6">
-                <div class="update-box">
-                    <input value="Update Cart" type="submit">
-                </div>
+                <span id="check-message"></span>
             </div>
         </div>
 
@@ -96,16 +93,12 @@
                     <h3>Order summary</h3>
                     <div class="d-flex">
                         <h4>Sub Total</h4>
-                        <div class="ml-auto font-weight-bold subtotal"> $ 130 </div>
-                    </div>
-                    <div class="d-flex">
-                        <h4>Discount</h4>
-                        <div class="ml-auto font-weight-bold"> $ 10 </div>
+                        <div class="ml-auto font-weight-bold subtotal"> 0 </div>
                     </div>
                     <hr class="my-1">
                     <div class="d-flex">
                         <h4>Coupon Discount</h4>
-                        <div class="ml-auto font-weight-bold"> $ 10 </div>
+                        <div class="ml-auto font-weight-bold" id="coupon-value"> 0 </div>
                     </div>
                     <div class="d-flex">
                         <h4>Shipping Cost</h4>
@@ -114,18 +107,21 @@
                     <hr>
                     <div class="d-flex gr-total">
                         <h5>Grand Total</h5>
-                        <div class="ml-auto h5 grandtotal"> $ 388 </div>
+                        <div class="ml-auto h5 grandtotal">0 </div>
                     </div>
                     <hr>
                 </div>
             </div>
-            <div class="col-12 d-flex shopping-box"><a href="checkout.html" class="ml-auto btn hvr-hover">Checkout</a>
+            <div class="col-12 d-flex shopping-box"><a href="/checkout" class="ml-auto btn hvr-hover">Checkout</a>
             </div>
         </div>
 
     </div>
 </div>
-<script src="/static/js/cart-page.js"></script>
+
 <!-- End Cart -->
 {{>instagramFeed}}
 {{>footer}}
+{{#extend "script"}}
+<script src="/js/customjs/cart-page.js"></script>
+{{/extend}}

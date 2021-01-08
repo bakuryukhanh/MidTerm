@@ -1,10 +1,10 @@
 var cartElement = document.getElementsByClassName("cart")[0];
 var productTitle = cartElement.getElementsByClassName("title");
 var productPrice = cartElement.getElementsByClassName("price");
+var productImg = cartElement.getElementsByClassName("product-image");
 var productQuantity = cartElement.getElementsByClassName("quantity");
 var productSubtotal = cartElement.getElementsByClassName("subtotal");
 var total = document.getElementById("total");
-var discount = document.getElementById("discount");
 var grandtotal = document.getElementById("grand-total");
 var checkoutBtn = document.getElementById("checkout");
 const form = document.getElementsByClassName("customer-infor")[0];
@@ -23,9 +23,12 @@ function update() {
             parseFloat(productPrice[i].innerHTML);
         productSubtotal[i].innerHTML = Math.round(subtotal * 100) / 100;
         var product = {};
+        product.id = productTitle[i].getAttribute("href").split("/")[2];
         product.name = productTitle[i].innerHTML;
+        product.imgSrc = productImg[i].firstElementChild.getAttribute("src");
         product.quantity = parseInt(productQuantity[i].innerHTML);
         product.price = parseFloat(productPrice[i].innerHTML);
+        console.log(product);
         bill.productList.push(product);
         totalprice += Math.round(subtotal * 100) / 100;
     }
@@ -39,14 +42,12 @@ function update() {
 }
 function checkout(event) {
     event.preventDefault();
-    const today = new Date();
-    bill.date =
-        today.getDate() + "/" + today.getMonth() + "/" + today.getFullYear();
     bill.total = parseFloat(document.getElementById("grand-total").innerHTML);
     bill.customerName = document.getElementById("name").value;
     bill.customerEmail = document.getElementById("email").value;
     bill.customerPhone = document.getElementById("phone").value;
     bill.customerAddress = document.getElementById("address").value;
+    bill.discountCode = document.getElementById("discountCode").value;
     bill.ship = 0;
     if (
         (bill.customerName == "") |
@@ -105,8 +106,9 @@ function checkout(event) {
                                             
                                             </div>
                                         </div>`;
+                    $("#myModal").modal("show");
                 }
             })
-            .then(() => $("#myModal").modal("show"));
+            .then(() => clearCart());
     }
 }

@@ -1,7 +1,6 @@
 exports.index = (req, res, next) => {
     if (!req.user) {
-        res.status(401);
-        res.send("you need to login");
+        return res.render("login-needed");
     }
     res.render("pages/account", { page: "account", user: req.user });
 };

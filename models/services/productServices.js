@@ -16,7 +16,6 @@ const listPageProduct = async (
         limit: itemPerPage,
         sort: sort,
     };
-    console.log(filter, options);
     var products = await productModel
         .paginate(filter, options)
         .catch((err) => console.log(err));
@@ -30,7 +29,6 @@ const getComments = async (productId) => {
     return product.comments;
 };
 const postComment = async (comment, productId) => {
-    console.log(comment, productId);
     const product = await productModel
         .findOne({
             _id: mongoose.mongo.ObjectID(productId),
@@ -40,7 +38,6 @@ const postComment = async (comment, productId) => {
         });
 
     product.comments.push(comment);
-    console.log(product);
     await product.save().catch((err) => {
         throw TypeError("error");
     });
