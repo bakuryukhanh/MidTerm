@@ -359,3 +359,6 @@
     margin-top: 15px;
     height: 40px;
 }
+.pwd-not-match {
+    color: red;
+}

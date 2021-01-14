@@ -102,11 +102,14 @@ exports.detail = async (req, res, next) => {
     sess = req.session;
     const id = req.params.id;
     const product = await productModel.findOne({ _id: ObjectId(id) });
+    const relateproduct = await productModel.find({ type: product.type });
+    console.log(relateproduct);
     res.render("pages/detail", {
         page: "shop",
         cart: sess.Cart,
         user: req.user,
         product: product,
+        relatedproduct: relateproduct,
     });
 };
 exports.search = async (req, res, next) => {

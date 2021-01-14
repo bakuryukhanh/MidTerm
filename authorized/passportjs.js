@@ -57,19 +57,6 @@ passport.use(
     )
 );
 
-passport.use(
-    new GoogleStrategy(
-        {
-            clientID: config.googleAuth.clientId,
-            clientSecret: config.googleAuth.clientSecret,
-            callbackURL: "/google/callback",
-        },
-        async function (token, tokenSecret, profile, done) {
-            const user = await UserService.FindOrCreateGG(profile);
-            done(null, user);
-        }
-    )
-);
 
 passport.serializeUser(function (user, done) {
     done(null, user.id);

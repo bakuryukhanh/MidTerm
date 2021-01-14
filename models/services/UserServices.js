@@ -2,6 +2,7 @@ const { userModel } = require("../userModel");
 const { ObjectId } = require("mongodb");
 const { to } = require("await-to-js");
 const mongoose = require("../../mongoose/mongoose");
+const bcrypt = require("bcryptjs");
 const addUser = async (data) => {
     const user = new userModel(data);
     var [err] = await to(user.save());
@@ -103,6 +104,38 @@ const getBillById = async (userId, billId) => {
     });
     return found;
 };
+const updateInfo = async (userId, data) => {
+    const user = await userModel
+        .findOne({
+            _id: mongoose.mongo.ObjectID(userId),
+        })
+        .catch((err) => {
+            throw new Error("finding USer failed");
+        });
+    user.name = data.name;
+    user.address = data.address;
+    user.phoneNumber = data.phoneNumber;
+    await user.save();
+};
+const changePassword = async (userId, oldpassword, newpassword) => {
+    const user = await userModel
+        .findOne({
+            _id: mongoose.mongo.ObjectID(userId),
+        })
+        .catch((err) => {
+            throw new Error("finding USer failed");
+        });
+    var [err, res] = await to(bcrypt.compare(oldpassword, user.password));
+    if (!res) {
+        throw new Error("Password wrong!");
+    }
+    var [err, hash] = await to(bcrypt.hash(newpassword, 10));
+    if (err) {
+        throw new Error("Bcrypt failure!");
+    }
+    user.password = hash;
+    user.save();
+};
 module.exports = {
     addUser,
     updateAva,
@@ -116,4 +149,6 @@ module.exports = {
     getBills,
     getBillById,
     removeFavList,
+    updateInfo,
+    changePassword,
 };

@@ -1,7 +1,20 @@
 {{>loginbar}}
 {{>navbar}}
+<div class="all-title-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 style="font-weight: bold;">YOUR INFORMATION</h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active">info </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container mt-5">
-    <div class="row full-vh">
+    <div class="row">
         <div class="col-md-6">
             <div class="avarta-place">
                 <img src="{{user.imgSrc}}" class="rounded-circle avatar-lg shadow" style="width:300px;height:300px;"
@@ -46,16 +59,109 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="info-place">
-                <p class="h2">{{user.name}}</p>
-                <p class="h4">Address: {{user.address}}</p>
-                <p class="h4">Phone Number: {{user.phoneNumber}}</p>
+            <h1 class="text-center h1" style="font-weight: bold;">User information setting</h1>
+            <div class="contact-box-main p-0">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12">
+                            <div class="contact-form-right">
+                                <form id="contactForm">
+
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label for="name" class="col-md-4 h3"> Name</label>
+                                            <div class="col-md-8">
+                                                <input readonly type="text" class="form-control-plaintext h3" id="name"
+                                                    name="name" value="{{user.name}}" required
+                                                    data-error="Please enter your name">
+                                                <div class="help-block with-errors"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label for="phone" class="col-md-4 h3"> Phone Number</label>
+                                            <div class="col-md-8">
+                                                <input readonly type="text" class="form-control-plaintext h3" id="phone"
+                                                    name="phone" required value="{{user.phoneNumber}}"
+                                                    data-error="Please enter your phone">
+                                                <div class="help-block with-errors"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label for="address" class="col-md-4 h3"> Address</label>
+                                            <div class="col-md-8">
+                                                <input readonly type="text" class="form-control-plaintext h3"
+                                                    id="address" name="address" required value="{{user.address}}"
+                                                    data-error="Please enter your address">
+                                                <div class="help-block with-errors"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="submit" id="submit-info-btn"
+                                            class="btn btn-primary hidden">Submit</button>
+                                    </div>
+                                    <div id="dialog"></div>
+                                </form>
+                                <div class="text-center">
+                                    <button id="update-info" class="btn btn-primary">Update Info</button>
+                                </div>
+                                <hr>
+                                <h2>Change password:</h2>
+                                <form id="change-password-form">
+                                    <div class="form-group row">
+                                        <label for="old-password" class="col-md-4 h5"> Old password:</label>
+                                        <div class="col-md-8">
+                                            <input type="password" class="form-controlt h5" id="old-password" required
+                                                name="old-password" data-error="Please enter your address">
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="new-password" class="col-md-4 h5"> New password:</label>
+                                        <div class="col-md-8">
+                                            <input type="password" class="form-controlt h5" id="new-password" required
+                                                name="new-password" data-error="Please enter your address">
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="confirm-password" class="col-md-4 h5"> Confirm new
+                                            password:</label>
+                                        <div class="col-md-8">
+                                            <input type="password" class="form-controlt h5" id="confirm-password"
+                                                required name="confirm-password" <div class="help-block with-errors">
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="pwd-not-match"></div>
+                                        <button type="submit" id="change-password-submit" class="btn btn-primary">Change
+                                            password</button>
+
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+</div>
+</div>
+</div>
 </div>
 {{>instagramFeed}}
 {{>footer}}
 {{#extend "script"}}
 <script src="/js/customjs/change-ava.js"></script>
+<script src="/js/customjs/update-info.js"></script>
+<script src="/js/customjs/change-password.js"></script>
 {{/extend}}
